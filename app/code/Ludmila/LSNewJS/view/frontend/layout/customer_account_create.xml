@@ -4,7 +4,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Magento\Framework\View\Element\Template" name="dealer_register"
-                   template="Ludmila_LSNewJS::dealer_registration.phtml"></block>
+                   template="Ludmila_LSNewJS::dealer_registration.phtml" before="-"></block>
         </referenceContainer>
     </body>
 </page>

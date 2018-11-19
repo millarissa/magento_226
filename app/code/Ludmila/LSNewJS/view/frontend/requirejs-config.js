@@ -1,8 +1,5 @@
 var config = {
     paths: {
-        geethubHello: 'Ludmila_LSNewJS/js/hello-message',
-    },
-    shim: {
-        geethubExampleJs: ['jquery']
+        dealer_reg: 'Ludmila_LSNewJS/js/dealer-reg',
     }
 };
