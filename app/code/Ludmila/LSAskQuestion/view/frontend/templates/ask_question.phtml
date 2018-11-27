@@ -1,61 +1,84 @@
-<?php
-
-?>
+<?php /** @var $block \Magento\Catalog\Block\Product\View */ ?>
 <?php $imageObject = $block->getImage($block->getProduct(), 'product_base_image'); ?>
-
-<div class="catalog-product-view-tab-ask-question">
-    <form class="form ask-question"
-          action="<?= $block->escapeUrl($block->getUrl('ask_question/submit')) ?>"
-          id="ask-question-form"
-          method="post"
-          data-mage-init='{"askQuestion":{}}'
-          onsubmit="return false;">
-
-        <fieldset class="fieldset">
-            <legend class="legend">
-                <span><?= $block->escapeHtml(__('Ask your question.')) ?></span>
-            </legend>
-            <div class="field ask-field-name required">
-                <label for="name_field" class="label"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
-                <div class="control">
-                    <input type="text" name="name" id="name_field" class="input-text" data-validate="{required:true}"
-                           placeholder="<?= $block->escapeHtmlAttr(__('Name')) ?>"/>
+<div class="catalog-product-view-tab-ask-question-form">
+    <h2><?= $block->escapeHtml(__('Ask your question')) ?></h2>
+    <div>
+        <form class="form ask-question"
+              action="<?= $block->escapeUrl($block->getUrl('ask_question/submit')) ?>"
+              id="ask-question-form"
+              method="post"
+              data-mage-init='{"ludmila_askQuestion":{}}'
+              onsubmit="return false;"
+        >
+            <fieldset class="fieldset">
+                <div class="field name required">
+                    <label class="label" for="name">
+                        <span><?= $block->escapeHtml(__('Name')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input name="name"
+                               id="name"
+                               title="<?= $block->escapeHtmlAttr(__('Name')) ?>"
+                               placeholder="<?= $block->escapeHtmlAttr(__('Name')) ?>"
+                               class="input-text" type="text"
+                               data-validate="{required:true}"
+                        />
+                    </div>
+                </div>
+                <div class="field email required">
+                    <label class="label" for="email">
+                        <span><?= $block->escapeHtml(__('Email')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input name="email"
+                               id="email"
+                               title="<?= $block->escapeHtmlAttr(__('Email')) ?>"
+                               placeholder="<?= $block->escapeHtmlAttr(__('you@example.com')) ?>"
+                               class="input-text"
+                               type="email"
+                               data-validate="{required:true, 'validate-email':true}"
+                        />
+                    </div>
+                </div>
+                <div class="field telephone">
+                    <label class="label" for="telephone">
+                        <span><?= $block->escapeHtml(__('Phone Number')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input name="telephone"
+                               id="telephone"
+                               title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
+                               placeholder="<?= $block->escapeHtmlAttr(__('+380000000000')) ?>"
+                               class="input-text"
+                               type="text"
+                               data-validate="{required:true, 'minlength':13, 'maxlength':13, 'mobileUA':true}"
+                        />
+                    </div>
+                </div>
+                <div class="field comment required">
+                    <label class="label" for="comment">
+                        <span><?= $block->escapeHtml(__('Your question')) ?></span>
+                    </label>
+                    <div class="control">
+                        <textarea name="comment"
+                                  id="comment"
+                                  title="<?= $block->escapeHtmlAttr(__('Your question?')) ?>"
+                                  placeholder="<?= $block->escapeHtmlAttr(__('Enter your question here')) ?>"
+                                  class="input-text"
+                                  cols="5" rows="3"
+                                  data-validate="{required:true}"
+                        ></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <input type="hidden" name="hideit" id="hideit" value=""/>
+                    <button type="submit" title="<?= $block->escapeHtmlAttr(__('Send question')) ?>" class="action submit primary">
+                        <span><?= $block->escapeHtml(__('Send question')) ?></span>
+                    </button>
                 </div>
             </div>
-
-            <div class="field ask-field-email required">
-                <label for="email_field" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
-                <div class="control">
-                    <input type="email" name="email" id="email_field" class="input-email"
-                           data-validate="{required:true}"
-                           placeholder="<?= $block->escapeHtmlAttr(__('you@example.org')) ?>"/>
-                </div>
-            </div>
-
-            <div class="field ask-field-phone required">
-                <label for="phone_field" class="label"><span><?= $block->escapeHtml(__('Phone')) ?></span></label>
-                <div class="control">
-                    <input type="number" name="phone" id="phone_field" class="input-phone"
-                           data-validate="{required:true}"
-                           placeholder="<?= $block->escapeHtmlAttr(__('+38(___)___-__-__')) ?>"/>
-                </div>
-            </div>
-
-            <div class="field ask-field-text required">
-                <label for="text_field" class="label"><span><?= $block->escapeHtml(__('Question')) ?></span></label>
-                <div class="control">
-                    <textarea name="detail" id="text_field" cols="5" rows="3" data-validate="{required:true}"
-                              placeholder="<?= $block->escapeHtmlAttr(__('Enter your question here')) ?>"></textarea>
-                </div>
-            </div>
-
-            <div class="actions-toolbar ask-form-actions">
-                <div class="primary actions-primary">
-                    <button type="submit" class="action submit primary">
-                        <span><?= $block->escapeHtml(__('Send question')) ?></span></button>
-                </div>
-            </div>
-    </form>
-
-
+        </form>
+    </div>
 </div>
