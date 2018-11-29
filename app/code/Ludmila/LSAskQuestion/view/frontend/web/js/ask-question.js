@@ -17,6 +17,8 @@ define([
         _create: function () {
             $(this.element).submit(this.submitForm.bind(this));
             $('body').on('ludmila_ask_question_clear_cookie', this.clearCookie.bind(this));
+
+
         },
 
         /**
@@ -25,6 +27,14 @@ define([
         submitForm: function () {
             if (!this.validateForm()) {
                 validationAlert();
+
+                return;
+            }
+            if ($.mage.cookies.get(this.options.cookieName)) {
+                alert({
+                    title: $.mage.__('Warning'),
+                    content: $.mage.__('Wait for 2 minutes and try again.')
+                });
 
                 return;
             }
@@ -39,6 +49,9 @@ define([
             var formData = new FormData($(this.element).get(0));
 
             formData.append('form_key', $.mage.cookies.get('form_key'));
+
+            formData.append('ludmila_question_was_sent', $.mage.cookies.get(this.options.cookieName));
+
             formData.append('isAjax', 1);
 
             $.ajax({
@@ -65,7 +78,15 @@ define([
 
                     if (response.status === 'Success') {
                         // Prevent from sending requests too often
-                        $.mage.cookies.set(this.options.cookieName, true);
+
+                        var timeInterval = new Date(new Date().getTime() + 120 * 1000);
+
+                        // console.log(timeInterval);
+                        // $.mage.cookies.set(this.options.cookieName, true);
+                        // console.log($.mage.cookies.get(this.options.cookieName));
+
+                        $.mage.cookies.set(this.options.cookieName, 1, {expires: timeInterval});
+
                     }
                 },
 
@@ -74,7 +95,6 @@ define([
                     $('body').trigger('processStop');
                     alert({
                         title: $.mage.__('Error'),
-                        /*eslint max-len: ["error", { "ignoreStrings": true }]*/
                         content: $.mage.__('Your question can not be sent right now. Please, contact us directly via email or phone to get your answer.')
                     });
                 }
