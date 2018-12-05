@@ -128,7 +128,7 @@
                 <input type="email" name="email" autocomplete="email" id="dealer_email_address" value="<?= $block->escapeHtmlAttr($block->getFormData()->getEmail()) ?>" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" data-mage-init='{"mage/trim-input":{}}' class="input-text" data-validate="{required:true, 'validate-email':true}">
             </div>
         </div>
-        <div class="field password required">
+        <div class="field dealer-password required">
             <label for="dealer_password" class="label"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
             <div class="control">
                 <input type="password" name="password" id="dealer_password"
@@ -139,9 +139,9 @@
                        data-validate="{required:true, 'validate-customer-password':true}"
                        autocomplete="off">
                 <div id="dealer_password-strength-meter-container" data-role="password-strength-meter" aria-live="polite">
-                    <div id="dealer_password-strength-meter" class="password-strength-meter">
+                    <div id="password-strength-meter" class="password-strength-meter">
                         <?= $block->escapeHtml(__('Password Strength')) ?>:
-                        <span id="dealer_password-strength-meter-label" data-role="password-strength-meter-label">
+                        <span id="password-strength-meter-label" data-role="password-strength-meter-label">
                             <?= $block->escapeHtml(__('No Password')) ?>
                         </span>
                     </div>
@@ -152,7 +152,7 @@
         <div class="field confirmation required">
             <label for="dealer_password-confirmation" class="label"><span><?= $block->escapeHtml(__('Confirm Password')) ?></span></label>
             <div class="control">
-                <input type="password" name="password_confirmation" title="<?= $block->escapeHtmlAttr(__('Confirm Password')) ?>" id="dealer_password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" autocomplete="off">
+                <input type="password" name="password_confirmation" title="<?= $block->escapeHtmlAttr(__('Confirm Password')) ?>" id="dealer_password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#dealer_password'}" autocomplete="off">
             </div>
         </div>
         <?= $block->getChildHtml('form_additional_info') ?>
