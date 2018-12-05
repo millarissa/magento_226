@@ -11,7 +11,9 @@
         <legend class="legend"><span><?= $block->escapeHtml(__('Personal Information')) ?></span></legend><br>
         <input type="hidden" name="success_url" value="<?= $block->escapeUrl($block->getSuccessUrl()) ?>">
         <input type="hidden" name="error_url" value="<?= $block->escapeUrl($block->getErrorUrl()) ?>">
-        <?= $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setObject($block->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
+
+        <?= $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setTemplate('Ludmila_LSNewJS::dealer_nameblock.phtml')->setObject($block->getFormData())->setForceUseCustomerAttributes(true)->toHtml(); ?>
+
         <?php if ($block->isNewsletterEnabled()): ?>
             <div class="field choice newsletter">
                 <input type="checkbox" name="is_subscribed" title="<?= $block->escapeHtmlAttr(__('Sign Up for Newsletter')) ?>" value="1" id="dealer_is_subscribed"<?php if ($block->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox">
