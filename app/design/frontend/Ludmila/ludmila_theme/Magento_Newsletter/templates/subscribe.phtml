@@ -12,6 +12,9 @@
 <div class="block newsletter">
     <div class="title"><strong><?= $block->escapeHtml(__('Newsletter')) ?></strong></div>
     <div class="content">
+        <div class="subscribe-change">
+            <p>"Subscribe" button changed to "Subscribe to our news!"</p>
+        </div>
         <form class="form subscribe"
             novalidate
             action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
