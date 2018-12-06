@@ -4,11 +4,13 @@ define([
     ], function ($) {
         var DealerRegPopup = {
             initModal: function (config, element) {
-                $dealerForm = $('.form-create-account').clone();
+                // $dealerForm = $('.form-create-account').clone();
+                $dealerForm = $('#dealer-form-validate');
                 $dealerForm.modal();
                 $element = $(element);
                 $element.click(function () {
                     $dealerForm.modal('openModal');
+                    $dealerForm.trigger('contentUpdated');
                 });
             }
         };
