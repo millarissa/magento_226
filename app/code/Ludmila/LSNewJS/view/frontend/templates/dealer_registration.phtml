@@ -107,7 +107,8 @@
             <div class="field country required">
                 <label for="dealer_country" class="label"><span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('country_id') ?></span></label>
                 <div class="control">
-                    <?= $block->getCountryHtmlSelect() ?>
+<!--                    --><?//= $block->getCountryHtmlSelect() ?>
+                    <?= $block->getCountryHtmlSelect(null, 'country_id', 'dealer_country') ?>
                 </div>
             </div>
             <?php $addressAttributes = $block->getChildBlock('customer_form_address_user_attributes');?>
