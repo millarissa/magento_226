@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page layout="1column"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Ludmila\LSNewClasses\Block\Homework11"
+                   name="oop"
+                   as="oop"
+                   template="Ludmila_LSNewClasses::homework11_block.phtml">
+                <arguments>
+                    <argument name="file_list" xsi:type="string">
+                        Ludmila\LSNewClasses\Model\showFiles
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
