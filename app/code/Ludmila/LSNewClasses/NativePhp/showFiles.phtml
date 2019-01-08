@@ -1,27 +1,21 @@
 <?php
 declare(strict_types=1);
-//use RecursiveIteratorIterator;
-//use RecursiveDirectoryIterator;
 
-namespace a_Class;
+namespace showFiles;
 
-class Foo
+class ShowFiles
 {
-    public function whoAmI()
+    public function show()
     {
-//        echo sprintf('Hi, i\'m %s', self::class) . "\n";
-//        echo get_class_methods(self::class) . "\n";
-
         $path = realpath('/misc/apps/magento-226/app/code/Ludmila/LSNewClasses');
 
 //        $objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::SELF_FIRST);
         $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path), \RecursiveIteratorIterator::SELF_FIRST);
         foreach($objects as $name => $object){
-            echo "$name\n";
+            echo "$name"." was modified on ".date('F d Y H:i:s',filemtime($name))."\n";
         }
-
     }
 }
-// This is object
-$foo1 = new Foo();
-$foo1->whoAmI();
+
+$foo1 = new ShowFiles();
+$foo1->show();

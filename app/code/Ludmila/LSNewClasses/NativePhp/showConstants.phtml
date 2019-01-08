@@ -1,0 +1,43 @@
+<?php
+declare(strict_types=1);
+
+namespace showConstants;
+
+class ShowConstants
+{
+
+    const SOME = 0;
+    const ANY = 7;
+
+    public function first()
+    {
+        echo "First";
+    }
+
+    public function second()
+    {
+        echo "Second";
+    }
+
+    public function showNames()
+    {
+
+//        echo get_class_methods(self::class) . "\n";
+        $oClass = new \ReflectionClass('\\showConstants\\ShowConstants');
+        $const = $oClass->getConstants();
+        var_dump($const);
+
+    }
+
+    public function showMethods()
+    {
+//        $class = new ReflectionClass('ShowConstants');
+        $class=new \ReflectionClass('\\showConstants\\ShowConstants');
+        $methods = $class->getMethods();
+        var_dump($methods);
+    }
+}
+
+$foo1 = new ShowConstants();
+$foo1->showNames();
+$foo1->showMethods();
