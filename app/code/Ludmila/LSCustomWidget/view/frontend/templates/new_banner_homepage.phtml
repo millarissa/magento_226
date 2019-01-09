@@ -1,0 +1,15 @@
+<?php
+/* @var $block \Ludmila\LSCustomWidget\Block\Widget\BannerHomepage */
+?>
+
+<?php if($block->getBlockId()): ?>
+    <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($block->getBlockId())->toHtml();?>
+<?php endif; ?>
+<?php if($block->getTitle()): ?>
+    <div class="block-button">
+        <a class="action button-link" href="<?php echo $block->getUrl('geekhub-cms') ?>"><?php echo $block->getTitle(); ?></a>
+    </div>
+<?php endif; ?>
+
+
+
