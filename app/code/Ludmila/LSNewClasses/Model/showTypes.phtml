@@ -3,83 +3,31 @@ namespace Ludmila\LSNewClasses\Model;
 
 class showTypes
 {
-    /**
-     * @var string
-     */
-    private $name;
-    /**
-     * @var string
-     */
-    private $email;
-    /**
-     * @var string
-     */
-    private $phoneNumber;
-    /**
-     * @var string
-     */
-    private $comment;
-    public function __construct($name = '', $email = '', $phoneNumber = '', $comment = '')
+
+    public $typeString;
+    public $typeObject;
+    public $typeBoolean;
+    public $typeNumber;
+    public $typeInit;
+    public $typeConst;
+    public $typeNull;
+    public $typeArray;
+
+    public function __construct($typeString, $typeObject, $typeBoolean, $typeNumber, $typeInit, $typeConst, $typeNull, $typeArray)
     {
-        $this->name = $name;
-        $this->email = $email;
-        $this->phoneNumber = $phoneNumber;
-        $this->comment = $comment;
+        $this->typeString = $typeString;
+        $this->typeObject = $typeObject;
+        $this->typeBoolean = $typeBoolean;
+        $this->typeNumber = $typeNumber;
+        $this->typeInit = $typeInit;
+        $this->typeConst = $typeConst;
+        $this->typeNull = $typeNull;
+        $this->typeArray = $typeArray;
     }
-    /**
-     * @return string
-     */
-    public function getName()
+
+    public function getArgs()
     {
-        return $this->name;
+        return get_object_vars($this);
     }
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-    /**
-     * @return string
-     */
-    public function getPhoneNumber()
-    {
-        return $this->phoneNumber;
-    }
-    /**
-     * @param string $phoneNumber
-     */
-    public function setPhoneNumber($phoneNumber)
-    {
-        $this->phoneNumber = $phoneNumber;
-    }
-    /**
-     * @return string
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-    /**
-     * @param string $comment
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-    }
+
 }

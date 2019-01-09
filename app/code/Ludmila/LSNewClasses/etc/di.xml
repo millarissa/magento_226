@@ -1,10 +1,17 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="\Ludmila\LSNewClasses\Model\showTypes" shared="true">
         <arguments>
-            <argument name="name" xsi:type="string">Unnamed</argument>
-            <argument name="email" xsi:type="string">unnamed@unnamed.com</argument>
-            <argument name="phoneNumber" xsi:type="string">123123</argument>
-            <argument name="comment" xsi:type="string">No comments</argument>
+            <argument name="typeString" xsi:type="string">Unnamed</argument>
+            <argument name="typeObject" xsi:type="object">\Magento\Framework\View\Element\Template</argument>
+            <argument name="typeBoolean" xsi:type="boolean">0</argument>
+            <argument name="typeNumber" xsi:type="number">123</argument>
+            <argument name="typeInit" xsi:type="init_parameter">\Magento\Store\Model\StoreManager::PARAM_RUN_CODE</argument>
+            <argument name="typeConst" xsi:type="const">\Ludmila\LSNewClasses\ViewModel\FilesList::RECURSIVE_ITERATOR</argument>
+            <argument name="typeNull" xsi:type="null"/>
+            <argument name="typeArray" xsi:type="array">
+                <item name="someKey1" xsi:type="<type>">someVal1</item>
+                <item name="someKey2" xsi:type="<type>">someVal2</item>
+            </argument>
         </arguments>
     </type>
 </config>
