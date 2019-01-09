@@ -7,7 +7,7 @@
 <?php endif; ?>
 <?php if($block->getTitle()): ?>
     <div class="block-button">
-        <a class="action button-link" href="geekhub-cms"><?php echo $block->getTitle(); ?></a>
+        <a class="action button-link" href="<?php $block->getUrl('geekhub-cms') ?>"><?php echo $block->getTitle(); ?></a>
     </div>
 <?php endif; ?>
 
