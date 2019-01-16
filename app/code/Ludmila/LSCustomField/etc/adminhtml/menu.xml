@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+        <!--<add id="Ludmila_LSCustomField::main_menu" title="Simple News"-->
+             <!--module="Ludmila_LSCustomField" sortOrder="20"-->
+             <!--resource="Ludmila_LSCustomField::simplenews" />-->
+        <add id="Ludmila_LSCustomField::ask_question" title="Ask Question"
+             module="Ludmila_LSCustomField" sortOrder="1" parent="Magento_Backend::content"
+             action="askquestion/question/ask" resource="Ludmila_LSCustomField::ask_question" />
+    </menu>
+</config>
