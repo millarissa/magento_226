@@ -1,12 +1,12 @@
 <?php
 namespace Ludmila\LSAskQuestion\Model;
-use Ludmila\LSAskQuestion\Model\ResourceModel\LSAskQuestion as AskQuestioneResource;
+use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion as AskQuestioneResource;
 
 /**
  * Class AskQuestion
  * @package Ludmila\LSAskQuestion\Model
  */
-class LSAskQuestion extends \Magento\Framework\Model\AbstractModel
+class AskQuestion extends \Magento\Framework\Model\AbstractModel
 {
     const STATUS_PENDING = 'pending';
     const STATUS_PROCESSED = 'processed';

@@ -3,7 +3,7 @@ namespace Ludmila\LSAskQuestion\Setup;
 use Magento\Framework\Setup\UpgradeSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
-use Ludmila\LSAskQuestion\Model\LSAskQuestion;
+use Ludmila\LSAskQuestion\Model\AskQuestion;
 class UpgradeSchema implements UpgradeSchemaInterface
 {
     /**
@@ -71,7 +71,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'status',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 15,
-                ['nullable' => false, 'default' => LSAskQuestion::STATUS_PENDING],
+                ['nullable' => false, 'default' => AskQuestion::STATUS_PENDING],
                 'Status'
             )->addColumn(
                 'store_id',

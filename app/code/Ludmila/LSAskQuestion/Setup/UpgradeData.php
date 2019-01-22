@@ -6,7 +6,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Store\Model\Store;
-use Ludmila\LSAskQuestion\Model\LSAskQuestion;
+use Ludmila\LSAskQuestion\Model\AskQuestion;
 class UpgradeData implements UpgradeDataInterface
 {
     /**
@@ -50,11 +50,11 @@ class UpgradeData implements UpgradeDataInterface
     {
         $setup->startSetup();
         if (version_compare($context->getVersion(), '1.0.1', '<')) {
-            $statuses = [LSAskQuestion::STATUS_PENDING, LSAskQuestion::STATUS_PROCESSED];
+            $statuses = [AskQuestion::STATUS_PENDING, AskQuestion::STATUS_PROCESSED];
             /** @var Transaction $transaction */
             $transaction = $this->transactionFactory->create();
             for ($i = 1; $i <= 5; $i++) {
-                /** @var LSAskQuestion $askQuestion */
+                /** @var AskQuestion $askQuestion */
                 $askQuestion = $this->askQuestionFactory->create();
                 $askQuestion->setName("Customer #$i")
                     ->setEmail("test-mail-$i@gmail.com")

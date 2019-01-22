@@ -1,5 +1,5 @@
 <?php
-namespace Ludmila\LSAskQuestion\Model\ResourceModel\LSAskQuestion;
+namespace Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion;
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
@@ -34,8 +34,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     protected function _construct()
     {
         $this->_init(
-            \Ludmila\LSAskQuestion\Model\LSAskQuestion::class,
-            \Ludmila\LSAskQuestion\Model\ResourceModel\LSAskQuestion::class
+            \Ludmila\LSAskQuestion\Model\AskQuestion::class,
+            \Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion::class
         );
     }
     /**
