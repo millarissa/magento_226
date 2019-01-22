@@ -1,6 +1,6 @@
 <?php
 namespace Ludmila\LSAskQuestion\Model;
-use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion as AskQuestioneResource;
+use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion as AskQuestionResource;
 
 /**
  * Class AskQuestion
