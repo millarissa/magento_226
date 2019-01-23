@@ -68,7 +68,7 @@ class UpgradeData implements UpgradeDataInterface
             }
             $transaction->save();
         }
-        if (version_compare($context->getVersion(), '1.0.3') < 0) {
+        if (version_compare($context->getVersion(), '1.0.2') < 0) {
             $this->updateDataForAskQuestion($setup, 'import_data.csv');
         }
         $setup->endSetup();
