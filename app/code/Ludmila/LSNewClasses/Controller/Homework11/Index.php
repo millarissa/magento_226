@@ -1,9 +1,10 @@
 <?php
 namespace Ludmila\LSNewClasses\Controller\Homework11;
 use Magento\Framework\App\Action\Action;
+
 /**
  * Class Index
- * @package Ludmila\LSNewClasses\Controller\Homework11;
+ * @package Ludmila\LSNewClasses\Controller\Homework11
  */
 class Index extends Action
 {

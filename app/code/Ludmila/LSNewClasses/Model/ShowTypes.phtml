@@ -27,7 +27,16 @@ class showTypes
 
     public function getArgs()
     {
-        return get_object_vars($this);
+        $param = [];
+        $param['typeString'] = $this->typeString;
+        $param['typeObject'] = $this->typeObject;
+        $param['typeBoolean'] = $this->typeBoolean;
+        $param['typeNumber'] = $this->typeNumber;
+        $param['typeInit'] = $this->typeInit;
+        $param['typeConst'] = $this->typeConst;
+        $param['typeNull'] = $this->typeNull;
+        $param['typeArray'] = $this->typeArray;
+        return $param;
     }
 
 }

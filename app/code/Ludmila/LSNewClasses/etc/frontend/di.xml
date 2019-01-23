@@ -1,0 +1,17 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<type name="Ludmila\LSNewClasses\Model\ShowTypes">
+    <arguments>
+        <argument name="typeString" xsi:type="string">Unnamed</argument>
+        <argument name="typeObject" xsi:type="object">Ludmila\LSNewClasses\Model\ShowConstants</argument>
+        <argument name="typeBoolean" xsi:type="boolean">0</argument>
+        <argument name="typeNumber" xsi:type="number">123</argument>
+        <argument name="typeInit" xsi:type="init_parameter">Ludmila\LSNewClasses\Model\ShowConstants::QWE</argument>
+        <argument name="typeConst" xsi:type="const">Ludmila\LSNewClasses\Model\ShowConstants::REQUEST</argument>
+        <argument name="typeNull" xsi:type="null"/>
+        <argument name="typeArray" xsi:type="array">
+            <item name="someKey1" xsi:type="string">Unnamed1</item>
+            <item name="someKey2" xsi:type="string">Unnamed2</item>
+        </argument>
+    </arguments>
+</type>
+</config>
