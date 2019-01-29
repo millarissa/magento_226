@@ -1,7 +1,7 @@
 <?php
 namespace Ludmila\LSAskQuestion\Controller\Adminhtml\Question;
 use Magento\Framework\Controller\ResultFactory;
-class Questions extends \Magento\Backend\App\Action
+class Question extends \Magento\Backend\App\Action
 {
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|\Magento\Framework\View\Result\Page

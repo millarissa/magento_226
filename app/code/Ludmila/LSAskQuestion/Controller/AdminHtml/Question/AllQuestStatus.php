@@ -7,10 +7,10 @@ use Magento\Framework\Controller\ResultFactory;
 use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\Collection;
 
 /**
- * Class MassStatus
+ * Class AllQuestStatus
  * @package Ludmila\LSAskQuestion\Controller\Adminhtml\Question
  */
-class MassStatus extends AbstractMassAction
+class AllQuestStatus extends AbstractMassAction
 {
     /**
      * @var Filter
@@ -22,7 +22,7 @@ class MassStatus extends AbstractMassAction
     protected $collectionFactory;
 
     /**
-     * MassStatus constructor.
+     * AllQuestStatus constructor.
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
@@ -46,9 +46,6 @@ class MassStatus extends AbstractMassAction
         foreach ($collection as $rate) {
             $rate->setStatus('answered')->save();
             $questionChangeStatus++;
-        }
-        if ($questionChangeStatus) {
-            $this->messageManager->addSuccess(__('A total of %1 record(s) were updated.', $questionChangeStatus));
         }
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setPath($this->getComponentRefererUrl());
