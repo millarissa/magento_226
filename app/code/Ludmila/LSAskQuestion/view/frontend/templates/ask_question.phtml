@@ -40,13 +40,13 @@
                         />
                     </div>
                 </div>
-                <div class="field telephone">
-                    <label class="label" for="telephone">
+                <div class="field phone">
+                    <label class="label" for="phone">
                         <span><?= $block->escapeHtml(__('Phone Number')) ?></span>
                     </label>
                     <div class="control">
-                        <input name="telephone"
-                               id="telephone"
+                        <input name="phone"
+                               id="phone"
                                title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
                                placeholder="<?= $block->escapeHtmlAttr(__('+38000-000-00-00')) ?>"
                                class="input-text"
@@ -55,13 +55,13 @@
                         />
                     </div>
                 </div>
-                <div class="field comment required">
-                    <label class="label" for="comment">
+                <div class="field question required">
+                    <label class="label" for="question">
                         <span><?= $block->escapeHtml(__('Your question')) ?></span>
                     </label>
                     <div class="control">
-                        <textarea name="comment"
-                                  id="comment"
+                        <textarea name="question"
+                                  id="question"
                                   title="<?= $block->escapeHtmlAttr(__('Your question?')) ?>"
                                   placeholder="<?= $block->escapeHtmlAttr(__('Enter your question here')) ?>"
                                   class="input-text"
@@ -73,6 +73,9 @@
             </fieldset>
             <div class="actions-toolbar">
                 <div class="primary">
+
+                    <input type="hidden" name="sku" value="<?php $block->escapeHtml($product->getSku()) ?>"/>
+
                     <input type="hidden" name="hideit" id="hideit" value=""/>
                     <button type="submit" title="<?= $block->escapeHtmlAttr(__('Send question')) ?>" class="action submit primary">
                         <span><?= $block->escapeHtml(__('Send question')) ?></span>
