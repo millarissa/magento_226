@@ -1,5 +1,28 @@
-<?php
-?>
-<div class="oop">
-    <h2>123</h2>
+<div class="homework11">
+    <h2>Files:</h2>
+    <?php
+    foreach ($block->giveFileList() as $filename) {
+        echo $filename . ' was modified on: ' . date('F d Y H:i:s.', filemtime($filename)) . '<br/>';
+    }
+    ?>
+    <h2>Constants:</h2>
+    <?php
+    foreach ($block->getConstants() as $constant) {
+        echo $constant . '<br/>';
+    }
+    ?>
+    <h2>Methods:</h2>
+    <?php
+    foreach ($block->getMethods() as $method) {
+        echo $method->name . '<br/>';
+    }
+    ?>
+    <h2>Types:</h2>
+    <?php foreach ($block->getParameters() as $parametersName => $parametersValue) :
+        if (is_array($parametersValue)) {
+            $parametersValue = $parametersValue['instance'] ?? 'array';
+        }
+        echo $parametersName . ' : ' . $parametersValue . '<br/>';
+        ?>
+    <?php endforeach; ?>
 </div>
