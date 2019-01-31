@@ -2,16 +2,16 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">askquestion_listing.askquestion_listing_data_source</item>
+            <item name="provider" xsi:type="string">allquestions_list.allquestions_list_data_source</item>
         </item>
     </argument>
     <settings>
         <spinner>askquestion_columns</spinner>
         <deps>
-            <dep>askquestion_listing.askquestion_listing_data_source</dep>
+            <dep>allquestions_list.allquestions_list_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="askquestion_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="allquestions_list_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">question_id</param>
@@ -19,7 +19,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Magento_Backend::admin</aclResource>
-        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="askquestion_listing_data_source">
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="allquestions_list_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>question_id</primaryFieldName>

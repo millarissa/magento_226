@@ -7,10 +7,10 @@ use Magento\Framework\Controller\ResultFactory;
 use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\Collection;
 
 /**
- * Class AllQuestStatus
+ * Class MassStatus
  * @package Ludmila\LSAskQuestion\Controller\Adminhtml\Question
  */
-class AllQuestStatus extends AbstractMassAction
+class MassStatus extends AbstractMassAction
 {
     /**
      * @var Filter
@@ -22,7 +22,7 @@ class AllQuestStatus extends AbstractMassAction
     protected $collectionFactory;
 
     /**
-     * AllQuestStatus constructor.
+     * MassStatus constructor.
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory

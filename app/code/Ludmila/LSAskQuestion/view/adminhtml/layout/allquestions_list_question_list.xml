@@ -3,7 +3,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <uiComponent name="questions_list"/>
+            <uiComponent name="allquestions_list"/>
         </referenceContainer>
     </body>
 </page>
