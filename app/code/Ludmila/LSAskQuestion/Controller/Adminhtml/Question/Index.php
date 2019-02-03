@@ -1,7 +1,7 @@
 <?php
 namespace Ludmila\LSAskQuestion\Controller\Adminhtml\Question;
 use Magento\Framework\Controller\ResultFactory;
-class Question extends \Magento\Backend\App\Action
+class Index extends \Magento\Backend\App\Action
 {
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|\Magento\Framework\View\Result\Page
@@ -10,8 +10,7 @@ class Question extends \Magento\Backend\App\Action
     {
         /** @var \Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        $resultPage->getConfig()->getTitle()->prepend(__('All Questions'));
-
+        $resultPage->getConfig()->getTitle()->prepend(__('All questions'));
         return $resultPage;
     }
 }

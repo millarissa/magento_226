@@ -2,16 +2,16 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">allquestions_list.allquestions_list_data_source</item>
+            <item name="provider" xsi:type="string">all_questions.all_questions_data_source</item>
         </item>
     </argument>
     <settings>
         <spinner>askquestion_columns</spinner>
         <deps>
-            <dep>allquestions_list.allquestions_list_data_source</dep>
+            <dep>all_questions.all_questions_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="allquestions_list_data_source" component="Magento_Ui/js/grid/provider">
+    <dataSource name="all_questions_data_source" component="Magento_Ui/js/grid/provider">
         <settings>
             <storageConfig>
                 <param name="indexField" xsi:type="string">question_id</param>
@@ -19,7 +19,7 @@
             <updateUrl path="mui/index/render"/>
         </settings>
         <aclResource>Magento_Backend::admin</aclResource>
-        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="allquestions_list_data_source">
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="all_questions_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>question_id</primaryFieldName>
@@ -53,7 +53,7 @@
             <!--</action>-->
             <action name="change_status">
                 <settings>
-                    <url path="allquestions_list/question/massStatus"/>
+                    <url path="allquestions/question/massStatus"/>
                     <type>status</type>
                     <label translate="true">Change status to Answered</label>
                 </settings>
@@ -70,11 +70,11 @@
             <!--</param>-->
             <!--<param name="indexField" xsi:type="string">schedule_id</param>-->
             <!--<param name="enabled" xsi:type="boolean">false</param>-->
-            <!--<param name="selectProvider" xsi:type="string">askquestion_listing.askquestion_listing.askquestion_columns.ids</param>-->
+            <!--<param name="selectProvider" xsi:type="string">all_questions.all_questions.askquestion_columns.ids</param>-->
             <!--</editorConfig>-->
             <!--<childDefaults>-->
             <!--<param name="fieldAction" xsi:type="array">-->
-            <!--<item name="provider" xsi:type="string">askquestion_listing.askquestion_listing.askquestion_columns_editor</item>-->
+            <!--<item name="provider" xsi:type="string">all_questions.all_questions.askquestion_columns_editor</item>-->
             <!--<item name="target" xsi:type="string">startEdit</item>-->
             <!--<item name="params" xsi:type="array">-->
             <!--<item name="0" xsi:type="string">${ $.$data.rowIndex }</item>-->

@@ -4,6 +4,6 @@
     <menu>
         <add id="Ludmila_LSAskQuestion::all_questions" title="All Questions List"
              module="Ludmila_LSAskQuestion" sortOrder="1" parent="Magento_Backend::content"
-             action="allquestions_list/question/list" resource="Ludmila_LSAskQuestion::all_questions_list" />
+             action="allquestions/question/index" resource="Ludmila_LSAskQuestion::all_questions" />
     </menu>
 </config>

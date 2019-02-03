@@ -3,7 +3,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
     <router id="admin">
-        <route id="allquestions_list" frontName="allquestions_list">
+        <route id="allquestions" frontName="allquestions">
             <module name="Ludmila_LSAskQuestion" />
         </route>
     </router>

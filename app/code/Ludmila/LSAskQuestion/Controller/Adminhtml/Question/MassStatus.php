@@ -47,6 +47,9 @@ class MassStatus extends AbstractMassAction
             $rate->setStatus('answered')->save();
             $questionChangeStatus++;
         }
+        if ($questionChangeStatus) {
+            $this->messageManager->addSuccess(__('A total of %1 record(s) were updated.', $questionChangeStatus));
+        }
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setPath($this->getComponentRefererUrl());
         return $resultRedirect;
