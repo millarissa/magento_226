@@ -35,22 +35,8 @@
         <filterSearch name="fulltext"/>
         <filters name="listing_filters"/>
         <exportButton name="export_button"/>
+
         <massaction name="listing_massaction">
-            <!--<action name="change_status">-->
-            <!--<argument name="data" xsi:type="array">-->
-            <!--<item name="config" xsi:type="array">-->
-            <!--<item name="type" xsi:type="string">change_status</item>-->
-            <!--<item name="label" xsi:type="string" translate="true">Change status</item>-->
-            <!--</item>-->
-            <!--</argument>-->
-            <!--<argument name="actions" xsi:type="configurableObject">-->
-            <!--<argument name="class" xsi:type="string">Magestore\Rewardpoints\Ui\Component\MassAction\Status\Options</argument>-->
-            <!--<argument name="data" xsi:type="array">-->
-            <!--<item name="urlPath" xsi:type="string">rewardpoints/earningrates/massStatus</item>-->
-            <!--<item name="paramName" xsi:type="string">status</item>-->
-            <!--</argument>-->
-            <!--</argument>-->
-            <!--</action>-->
             <action name="change_status">
                 <settings>
                     <url path="allquestions/question/massStatus"/>
@@ -59,29 +45,11 @@
                 </settings>
             </action>
         </massaction>
+
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="askquestion_columns">
         <settings>
-            <!--<editorConfig>-->
-            <!--<param name="clientConfig" xsi:type="array">-->
-            <!--<item name="saveUrl" xsi:type="url" path="lesson9/cron/inlineEdit"/>-->
-            <!--<item name="validateBeforeSave" xsi:type="boolean">false</item>-->
-            <!--</param>-->
-            <!--<param name="indexField" xsi:type="string">schedule_id</param>-->
-            <!--<param name="enabled" xsi:type="boolean">false</param>-->
-            <!--<param name="selectProvider" xsi:type="string">all_questions.all_questions.askquestion_columns.ids</param>-->
-            <!--</editorConfig>-->
-            <!--<childDefaults>-->
-            <!--<param name="fieldAction" xsi:type="array">-->
-            <!--<item name="provider" xsi:type="string">all_questions.all_questions.askquestion_columns_editor</item>-->
-            <!--<item name="target" xsi:type="string">startEdit</item>-->
-            <!--<item name="params" xsi:type="array">-->
-            <!--<item name="0" xsi:type="string">${ $.$data.rowIndex }</item>-->
-            <!--<item name="1" xsi:type="boolean">true</item>-->
-            <!--</item>-->
-            <!--</param>-->
-            <!--</childDefaults>-->
         </settings>
         <selectionsColumn name="ids">
             <settings>
@@ -121,17 +89,5 @@
                 <label translate="true">Question</label>
             </settings>
         </column>
-        <!--<column name="scheduled_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">-->
-        <!--<settings>-->
-        <!--<filter>dateRange</filter>-->
-        <!--<dataType>date</dataType>-->
-        <!--<label translate="true">Scheduled</label>-->
-        <!--</settings>-->
-        <!--</column>-->
-        <!--<actionsColumn name="actions" class="Geekhub\Lesson9\Ui\Component\Listing\Column\Actions">-->
-        <!--<settings>-->
-        <!--<indexField>question_id</indexField>-->
-        <!--</settings>-->
-        <!--</actionsColumn>-->
     </columns>
 </listing>
