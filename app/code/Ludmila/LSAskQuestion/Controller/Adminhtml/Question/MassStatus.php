@@ -7,11 +7,12 @@ use Magento\Ui\Component\MassAction\Filter;
 use Magento\Framework\Controller\ResultFactory;
 use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\Collection;
 
+
 /**
  * Class MassStatus
  * @package Ludmila\LSAskQuestion\Controller\Adminhtml\Question
  */
-//class MassStatus extends AbstractMassAction
+
 class MassStatus extends \Magento\Backend\App\Action
 
 {
@@ -69,20 +70,22 @@ class MassStatus extends \Magento\Backend\App\Action
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $questionChangeStatus = 0;
         foreach ($collection as $rate) {
-            $rate->setStatus('answered')->save();
+//            $rate->setStatus($statusValue)->save();
+            $rate->setStatus('processed')->save();
             $questionChangeStatus++;
         }
 
 //        $this->messageManager->addSuccess(__('A total of %1 record(s) have been modified.', $collection->getSize()));
 
-        if ($questionChangeStatus) {
+//        if ($questionChangeStatus) {
             $this->messageManager->addSuccess(__('A total of %1 record(s) were updated.', $questionChangeStatus));
-        }
+//        }
+
 
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-//        return $resultRedirect->setPath('*/*/');
-        $resultRedirect->setPath($this->getComponentRefererUrl());
-        return $resultRedirect;
+        return $resultRedirect->setPath('*/*/');
+//        $resultRedirect->setPath($this->getComponentRefererUrl());
+//        return $resultRedirect;
     }
 
 

@@ -37,7 +37,14 @@
         <exportButton name="export_button"/>
 
         <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">question_id</item>
+                </item>
+            </argument>
+
             <action name="change_status">
+
                 <settings>
                     <url path="allquestions/question/massStatus"/>
                     <type>status</type>

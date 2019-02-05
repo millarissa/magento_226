@@ -6,6 +6,11 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     private $storeManager;
+
+    /**
+     * @var string
+     */
+    protected $_idFieldName = 'question_id';
     /**
      * Collection constructor.
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
