@@ -11,6 +11,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @var string
      */
     protected $_idFieldName = 'question_id';
+
+    /**
+     * @var string
+     */
+    protected $_eventPrefix = 'ludmila_ask_question_collection';
+
+    /**
+     * @var string
+     */
+    protected $_eventObject = 'askquestion_collection';
     /**
      * Collection constructor.
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory

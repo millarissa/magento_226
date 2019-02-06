@@ -3,7 +3,7 @@ namespace Ludmila\LSAskQuestion\Model;
 use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion as AskQuestionResource;
 
 /**
- * Class AskQuestion
+ * Class LSAskQuestion
  * @package Ludmila\LSAskQuestion\Model
  */
 class AskQuestion extends \Magento\Framework\Model\AbstractModel
@@ -15,8 +15,10 @@ class AskQuestion extends \Magento\Framework\Model\AbstractModel
      */
     private $storeManager;
 
+    protected $_eventPrefix = 'ludmila_ask_question';
+
     /**
-     * AskQuestion constructor.
+     * LSAskQuestion constructor.
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager

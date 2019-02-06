@@ -7,6 +7,11 @@ use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Store\Model\Store;
 use Ludmila\LSAskQuestion\Model\AskQuestion;
+
+use \Magento\Framework\File\Csv;
+use Magento\Eav\Setup\EavSetup;
+use Magento\Eav\Setup\EavSetupFactory;
+
 class UpgradeData implements UpgradeDataInterface
 {
     /**
@@ -25,6 +30,11 @@ class UpgradeData implements UpgradeDataInterface
      * @var \Magento\Framework\DB\TransactionFactory
      */
     private $transactionFactory;
+
+    /**
+     * @var EavSetupFactory
+     */
+    private $eavSetupFactory;
     /**
      * UpgradeData constructor.
      * @param \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory
@@ -36,12 +46,14 @@ class UpgradeData implements UpgradeDataInterface
         \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory,
         \Magento\Framework\Component\ComponentRegistrar $componentRegistrar,
         \Magento\Framework\File\Csv $csv,
-        \Magento\Framework\DB\TransactionFactory $transactionFactory
+        \Magento\Framework\DB\TransactionFactory $transactionFactory,
+        EavSetupFactory $eavSetupFactory
     ) {
         $this->askQuestionFactory = $askQuestionFactory;
         $this->componentRegistrar = $componentRegistrar;
         $this->csv = $csv;
         $this->transactionFactory = $transactionFactory;
+        $this->eavSetupFactory = $eavSetupFactory;
     }
     /**
      * {@inheritdoc}
@@ -70,6 +82,41 @@ class UpgradeData implements UpgradeDataInterface
         }
         if (version_compare($context->getVersion(), '1.0.2') < 0) {
             $this->updateDataForAskQuestion($setup, 'import_data.csv');
+        }
+
+        if (version_compare($context->getVersion(), '1.0.3') < 0) {
+            /** @var EavSetup $eavSetup */
+            $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+            /**
+             * Add attribute to the eav/attribute
+             */
+            $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'allow_ask_questions');
+            $eavSetup->addAttribute(
+                \Magento\Catalog\Model\Product::ENTITY,
+                'allow_to_ask_questions',
+                [
+                    'group' => 'General',
+                    'type' => 'int',
+                    'backend' => '',
+                    'frontend' => '',
+                    'label' => 'Allow to ask questions',
+                    'input' => 'boolean',
+                    'class' => '',
+                    'source' => \Magento\Eav\Model\Entity\Attribute\Source\Boolean::class,
+                    'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'visible' => true,
+                    'required' => false,
+                    'user_defined' => false,
+                    'default' => 0,
+                    'searchable' => false,
+                    'filterable' => false,
+                    'comparable' => false,
+                    'visible_on_front' => false,
+                    'used_in_product_listing' => false,
+                    'unique' => false,
+                    'apply_to' => 'simple,configurable,virtual,bundle,downloadable'
+                ]
+            );
         }
         $setup->endSetup();
     }
