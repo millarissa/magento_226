@@ -58,7 +58,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @return Collection
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function addStoreFilter(int $storeId = 0): self
+    public function addStoreFilter(int $storeId = 0)
     {
         if (!$storeId) {
             $storeId = (int) $this->storeManager->getStore()->getId();

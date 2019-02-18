@@ -21,7 +21,7 @@ class Status
     public function execute()
     {
         $date = date("Y-m-d h:i:s");
-        $numberDays = strtotime('-' . $this->getNumberOfDays() . ' minutes', strtotime($date));
+        $numberDays = strtotime('-' . $this->getNumberOfDays() . ' day', strtotime($date));
         $newDate = date('Y-m-d h:i:s', $numberDays);
 
         $questions = $this->questionsFactory->create();
@@ -32,7 +32,7 @@ class Status
 //        ;
 
         $collection = $questions->getCollection()
-            ->addFieldToFilter('status', 'pending')
+            ->addFieldToFilter('status', array('eq' => AskQuestion::STATUS_PENDING))
             ->addFieldToFilter('created_at', array('lt' => $newDate))
         ;
 
@@ -56,7 +56,7 @@ class Status
 
 
         foreach ($collection as $item) {
-            $item->setStatus('processed')->save();
+            $item->setStatus(AskQuestion::STATUS_ANSWERED)->save();
         }
 //                $this->logger->info('Cron Job Statuses changed');
 

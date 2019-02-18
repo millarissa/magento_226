@@ -44,20 +44,7 @@ class MassStatus extends \Magento\Backend\App\Action
      * @param Collection $collection
      * @return mixed
      */
-//    protected function massAction(Collection $collection)
-//    {
-//        $questionChangeStatus = 0;
-//        foreach ($collection as $rate) {
-//            $rate->setStatus('answered')->save();
-//            $questionChangeStatus++;
-//        }
-//        if ($questionChangeStatus) {
-//            $this->messageManager->addSuccess(__('A total of %1 record(s) were updated.', $questionChangeStatus));
-//        }
-//        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-//        $resultRedirect->setPath($this->getComponentRefererUrl());
-//        return $resultRedirect;
-//    }
+
 
     /**
      * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
@@ -66,27 +53,18 @@ class MassStatus extends \Magento\Backend\App\Action
 
     public function execute()
     {
-//        $statusValue = $this->getRequest()->getParam('status');
+        $statusValue = $this->getRequest()->getParam('status');
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $questionChangeStatus = 0;
         foreach ($collection as $rate) {
-//            $rate->setStatus($statusValue)->save();
-            $rate->setStatus('processed')->save();
+            $rate->setStatus($statusValue)->save();
+//            $rate->setStatus('processed')->save();
             $questionChangeStatus++;
         }
 
-//        $this->messageManager->addSuccess(__('A total of %1 record(s) have been modified.', $collection->getSize()));
-
-//        if ($questionChangeStatus) {
             $this->messageManager->addSuccess(__('A total of %1 record(s) were updated.', $questionChangeStatus));
-//        }
-
 
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         return $resultRedirect->setPath('*/*/');
-//        $resultRedirect->setPath($this->getComponentRefererUrl());
-//        return $resultRedirect;
     }
-
-
 }

@@ -48,7 +48,7 @@
                 <settings>
                     <url path="allquestions/question/massStatus"/>
                     <type>status</type>
-                    <label translate="true">Change status to Answered</label>
+                    <label translate="true">Change status</label>
                 </settings>
             </action>
         </massaction>
