@@ -8,27 +8,22 @@ class ShowFiles
     /**
      * @var \Magento\Framework\Filesystem\DirectoryList
      */
-    protected $_dir;
+    protected $directoryList;
 
     /**
      * ShowFiles constructor.
-     * @param \Magento\Framework\Filesystem\DirectoryList $dir
+     * @param \Magento\Framework\Filesystem\DirectoryList $directoryList
      */
     public function __construct(
-        \Magento\Framework\Filesystem\DirectoryList $dir
+        \Magento\Framework\Filesystem\DirectoryList $directoryList
     )
     {
-        $this->_dir = $dir;
+        $this->directoryList = $directoryList;
     }
 
-    /**
-     *
-     */
     public function show()
     {
-//        $path = realpath('/misc/apps/magento-226/app/code/Ludmila/LSNewClasses');
-
-        $path = $this->_dir->getRoot();
+        $path = $this->directoryList->getPath(join(DIRECTORY_SEPARATOR, array('app', 'code', 'Ludmila', 'LSNewClasses')));
 
         $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path), \RecursiveIteratorIterator::SELF_FIRST);
         foreach($objects as $name => $object){
