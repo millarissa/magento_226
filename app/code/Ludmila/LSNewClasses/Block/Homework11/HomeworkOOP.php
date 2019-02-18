@@ -43,9 +43,9 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
     /**
      * @return \RecursiveIteratorIterator
      */
-    public function giveFileList(): \RecursiveIteratorIterator
+    public function getFileList(): \RecursiveIteratorIterator
     {
-        return $this->showFilesGet->giveFileList();
+        return $this->showFilesGet->show();
     }
     /**
      * @return array
@@ -68,6 +68,6 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
      */
     public function getParameters(): array
     {
-        return $this->showTypesGet->getParameters();
+        return $this->showTypesGet->getArgs();
     }
 }

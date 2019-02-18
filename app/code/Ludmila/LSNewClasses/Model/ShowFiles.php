@@ -31,6 +31,3 @@ class ShowFiles
         }
     }
 }
-
-$foo1 = new ShowFiles();
-$foo1->show();
