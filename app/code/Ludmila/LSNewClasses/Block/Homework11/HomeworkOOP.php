@@ -45,7 +45,7 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
      */
     public function getFileList(): \RecursiveIteratorIterator
     {
-        return $this->showFilesGet->show();
+        return $this->showFilesGet->getFileList();
     }
     /**
      * @return array

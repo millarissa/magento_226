@@ -21,13 +21,11 @@ class ShowFiles
         $this->directoryList = $directoryList;
     }
 
-    public function show()
+    public function getFileList()
     {
         $path = $this->directoryList->getPath(join(DIRECTORY_SEPARATOR, array('app', 'code', 'Ludmila', 'LSNewClasses')));
 
         $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path), \RecursiveIteratorIterator::SELF_FIRST);
-        foreach($objects as $name => $object){
-            echo "$name"." was modified on ".date('F d Y H:i:s',filemtime($name))."\n";
-        }
+        return $objects;
     }
 }

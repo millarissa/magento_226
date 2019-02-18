@@ -1,6 +1,6 @@
 <div class="homework11">
     <h2><?php /* @escapeNotVerified */ echo __('Files:')?></h2>
-    <?php foreach ($block->giveFileList() as $filename): ?>
+    <?php foreach ($block->getFileList() as $filename): ?>
         <p><?php echo __('%s was modified on %s:', $filename, date('F d Y H:i:s.', filemtime($filename)) ); ?></p>
     <?php endforeach;?>
 
