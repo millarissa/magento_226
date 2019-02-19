@@ -1,7 +1,7 @@
 <?php
 namespace Ludmila\LSNewClasses\Model;
 
-class showTypes
+class ShowTypes
 {
 
     public $typeString;

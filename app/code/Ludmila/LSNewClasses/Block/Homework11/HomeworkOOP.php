@@ -12,15 +12,15 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
     /**
      * @var ShowFiles
      */
-    public $showFilesGet;
+    public $filesProvider;
     /**
      * @var ShowConstants
      */
-    public $showConstantsGet;
+    public $constantsProvider;
     /**
      * @var ShowTypes
      */
-    public $showTypesGet;
+    public $typesProvider;
 
     /**
      * HomeworkOOP constructor.
@@ -36,16 +36,16 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
         ShowTypes $showTypes
     ) {
         parent::__construct($context);
-        $this->showFilesGet = $showFiles;
-        $this->showConstantsGet = $showConstants;
-        $this->showTypesGet = $showTypes;
+        $this->filesProvider = $showFiles;
+        $this->constantsProvider = $showConstants;
+        $this->typesProvider = $showTypes;
     }
     /**
      * @return \RecursiveIteratorIterator
      */
     public function getFileList(): \RecursiveIteratorIterator
     {
-        return $this->showFilesGet->getFileList();
+        return $this->filesProvider->getFileList();
     }
     /**
      * @return array
@@ -53,7 +53,7 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
      */
     public function getMethods(): array
     {
-        return $this->showConstantsGet->getMethods();
+        return $this->constantsProvider->getMethods();
     }
     /**
      * @return array
@@ -61,13 +61,13 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
      */
     public function getConstants(): array
     {
-        return $this->showConstantsGet->getConstants();
+        return $this->constantsProvider->getConstants();
     }
     /**
      * @return array
      */
     public function getParameters(): array
     {
-        return $this->showTypesGet->getArgs();
+        return $this->typesProvider->getArgs();
     }
 }
