@@ -3,16 +3,26 @@ namespace Ludmila\LSNewClasses\Model;
 
 class ShowTypes
 {
+    private $typeString;
+    private $typeObject;
+    private $typeBoolean;
+    private $typeNumber;
+    private $typeInit;
+    private $typeConst;
+    private $typeNull;
+    private $typeArray;
 
-    public $typeString;
-    public $typeObject;
-    public $typeBoolean;
-    public $typeNumber;
-    public $typeInit;
-    public $typeConst;
-    public $typeNull;
-    public $typeArray;
-
+    /**
+     * ShowTypes constructor.
+     * @param $typeString
+     * @param $typeObject
+     * @param $typeBoolean
+     * @param $typeNumber
+     * @param $typeInit
+     * @param $typeConst
+     * @param $typeNull
+     * @param $typeArray
+     */
     public function __construct($typeString, $typeObject, $typeBoolean, $typeNumber, $typeInit, $typeConst, $typeNull, $typeArray)
     {
         $this->typeString = $typeString;
@@ -25,6 +35,9 @@ class ShowTypes
         $this->typeArray = $typeArray;
     }
 
+    /**
+     * @return array
+     */
     public function getArgs()
     {
         $param = [];

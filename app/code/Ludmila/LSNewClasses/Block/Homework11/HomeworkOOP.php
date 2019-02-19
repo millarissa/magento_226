@@ -12,15 +12,15 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
     /**
      * @var ShowFiles
      */
-    public $filesProvider;
+    private $filesProvider;
     /**
      * @var ShowConstants
      */
-    public $constantsProvider;
+    private $constantsProvider;
     /**
      * @var ShowTypes
      */
-    public $typesProvider;
+    private $typesProvider;
 
     /**
      * HomeworkOOP constructor.
