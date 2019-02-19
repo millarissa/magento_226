@@ -3,12 +3,14 @@ namespace Ludmila\LSNewClasses\Block\Homework11;
 use Ludmila\LSNewClasses\Model\ShowFiles;
 use Ludmila\LSNewClasses\Model\ShowConstants;
 use Ludmila\LSNewClasses\Model\ShowTypes;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
 
 /**
  * Class HomeworkOOP
  * @package Ludmila\LSNewClasses\Block\Homework11
  */
-class HomeworkOOP extends \Magento\Framework\View\Element\Template {
+class HomeworkOOP extends Template {
     /**
      * @var ShowFiles
      */
@@ -24,13 +26,13 @@ class HomeworkOOP extends \Magento\Framework\View\Element\Template {
 
     /**
      * HomeworkOOP constructor.
-     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param Context $context
      * @param ShowConstants $showConstants
      * @param ShowFiles $showFiles
      * @param ShowTypes $showTypes
      */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
+        Context $context,
         ShowConstants $showConstants,
         ShowFiles $showFiles,
         ShowTypes $showTypes
