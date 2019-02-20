@@ -3,14 +3,14 @@ namespace Ludmila\LSNewClasses\Model;
 
 class ShowTypes
 {
-    public $typeString;
-    public $typeObject;
-    public $typeBoolean;
-    public $typeNumber;
-    public $typeInit;
-    public $typeConst;
-    public $typeNull;
-    public $typeArray;
+    private $typeString;
+    private $typeObject;
+    private $typeBoolean;
+    private $typeNumber;
+    private $typeInit;
+    private $typeConst;
+    private $typeNull;
+    private $typeArray;
 
     /**
      * ShowTypes constructor.
@@ -51,5 +51,4 @@ class ShowTypes
         $param['typeArray'] = $this->typeArray;
         return $param;
     }
-
 }
