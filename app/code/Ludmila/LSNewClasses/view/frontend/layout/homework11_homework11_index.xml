@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page layout='1column' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <head>
+        <title>Homework11_OOP</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <container name="homework11_wrapper" htmlClass="homework11_wrapper" htmlTag="div">
+                <block class="Ludmila\LSNewClasses\Block\Homework11\HomeworkOOP" template="Ludmila_LSNewClasses::homework11_block.phtml" name="homework11" />
+            </container>
+        </referenceContainer>
+    </body>
+</page>
