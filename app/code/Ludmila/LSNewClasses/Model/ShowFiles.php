@@ -27,7 +27,7 @@ class ShowFiles
      */
     public function getFileList()
     {
-        $path = realpath($this->directoryList->getRoot() . join(DIRECTORY_SEPARATOR, array('app', 'code', 'Ludmila', 'LSNewClasses')));
+        $path = realpath($this->directoryList->getRoot() . join(DIRECTORY_SEPARATOR, array('/app', 'code', 'Ludmila', 'LSNewClasses')));
         $objects = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path), \RecursiveIteratorIterator::SELF_FIRST);
 
         return $objects;
