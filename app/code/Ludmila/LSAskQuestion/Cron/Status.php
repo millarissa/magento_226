@@ -1,5 +1,8 @@
 <?php
 namespace Ludmila\LSAskQuestion\Cron;
+
+use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory;
+
 class Status
 {
     /**
@@ -8,14 +11,21 @@ class Status
     private $logger;
 
     /**
+     * @var Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
      * Status constructor.
      * @param \Psr\Log\LoggerInterface $logger
      * @param Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $askQuestionsFactory
      */
-    public function __construct(\Psr\Log\LoggerInterface $logger,  Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $askQuestionsFactory)
+    public function __construct(
+        \Psr\Log\LoggerInterface $logger,
+        Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $collectionFactory)
     {
         $this->logger = $logger;
-        $this->questionsFactory = $askQuestionsFactory;
+        $this->collectionFactory = $collectionFactory;
     }
 
     public function execute()
@@ -24,49 +34,23 @@ class Status
         $numberDays = strtotime('-' . $this->getNumberOfDays() . ' day', strtotime($date));
         $newDate = date('Y-m-d h:i:s', $numberDays);
 
-        $questions = $this->questionsFactory->create();
-
-//        $orders = Mage::getModel('sales/order')->getCollection()
-//            ->addFieldToFilter('status', 'pending')
-//            ->addFieldToFilter('cod_fee', array('null' => true))
-//        ;
+        $questions = $this->collectionFactory->create();
 
         $collection = $questions->getCollection()
             ->addFieldToFilter('status', array('eq' => AskQuestion::STATUS_PENDING))
             ->addFieldToFilter('created_at', array('lt' => $newDate))
         ;
 
-
-//        foreach ($orders as $order) {
-//            if (strtotime($order->getCreatedAt()) < $old_time)  {
-//                try{
-//                    $id = $order->getIncrementId();
-//
-//                    Mage::getModel('sales/order')
-//                        ->loadByIncrementId($id)
-//                        ->setState('pending_payment', true)
-//                        ->save();
-//
-//                    $out .= $id."\n";
-//                } catch (Exception $e)  {
-//                    $out .= "Caught exception : ".$e->getMessage()."\n";
-//                }
-//            }
-//        }
-
-
         foreach ($collection as $item) {
-            $item->setStatus(AskQuestion::STATUS_ANSWERED)->save();
+            $item->setStatus(AskQuestion::STATUS_PROCESSED)->save();
         }
-//                $this->logger->info('Cron Job Statuses changed');
-
+        $this->logger->info('Cron Job Statuses changed');
     }
 
-    public function getNumberOfDays(){
+    /**
+     * @return int
+     */
+    protected function getNumberOfDays(){
         return 3;
     }
-
-//
-
-
 }
