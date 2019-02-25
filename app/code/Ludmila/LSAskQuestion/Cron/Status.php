@@ -1,8 +1,13 @@
 <?php
 namespace Ludmila\LSAskQuestion\Cron;
 
+use Ludmila\LSAskQuestion\Model\AskQuestion;
 use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory;
 
+/**
+ * Class Status
+ * @package Ludmila\LSAskQuestion\Cron
+ */
 class Status
 {
     /**
@@ -11,19 +16,19 @@ class Status
     private $logger;
 
     /**
-     * @var Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory
+     * @var CollectionFactory
      */
     protected $collectionFactory;
 
     /**
      * Status constructor.
      * @param \Psr\Log\LoggerInterface $logger
-     * @param Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $askQuestionsFactory
+     * @param CollectionFactory $collectionFactory
      */
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
-        Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $collectionFactory)
-    {
+        \Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $collectionFactory
+    ) {
         $this->logger = $logger;
         $this->collectionFactory = $collectionFactory;
     }
@@ -34,17 +39,16 @@ class Status
         $numberDays = strtotime('-' . $this->getNumberOfDays() . ' day', strtotime($date));
         $newDate = date('Y-m-d h:i:s', $numberDays);
 
-        $questions = $this->collectionFactory->create();
-
-        $collection = $questions->getCollection()
-            ->addFieldToFilter('status', array('eq' => AskQuestion::STATUS_PENDING))
-            ->addFieldToFilter('created_at', array('lt' => $newDate))
-        ;
+        $collection = $this->collectionFactory->create();
+        $collection
+            ->addFieldToFilter('status', AskQuestion::STATUS_PENDING)
+            ->addFieldToFilter('created_at', array('lt' => $newDate));
 
         foreach ($collection as $item) {
-            $item->setStatus(AskQuestion::STATUS_PROCESSED)->save();
+            $item->setStatus( AskQuestion::STATUS_PROCESSED)->save();
         }
-        $this->logger->info('Cron Job Statuses changed');
+
+        $this->logger->info('Cron Job Statuses changed ');
     }
 
     /**
