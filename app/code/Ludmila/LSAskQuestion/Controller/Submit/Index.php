@@ -4,6 +4,12 @@ use Ludmila\LSAskQuestion\Model\AskQuestion;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
+use Ludmila\LSAskQuestion\Helper\Mail;
+
+/**
+ * Class Index
+ * @package Ludmila\LSAskQuestion\Controller\Submit
+ */
 class Index extends \Magento\Framework\App\Action\Action
 {
     const STATUS_ERROR = 'Error';
@@ -12,28 +18,39 @@ class Index extends \Magento\Framework\App\Action\Action
      * @var \Magento\Framework\Data\Form\FormKey\Validator
      */
     private $formKeyValidator;
-    /**
-     * Index constructor.
-     * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
-     * @param \Magento\Framework\App\Action\Context $context
-     */
 
     /**
      * @var \Ludmila\LSAskQuestion\Model\AskQuestionFactory
      */
     private $askQuestionFactory;
 
+    /**
+     * @var Mail
+     */
+    private $mailHelper;
+
+    /**
+     * Index constructor.
+     * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     * @param \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory
+     * @param \Magento\Framework\App\Action\Context $context
+     * @param Mail $mailHelper
+     */
     public function __construct(
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
         \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory,
-        \Magento\Framework\App\Action\Context $context
+        \Magento\Framework\App\Action\Context $context,
+        Mail $mailHelper
     ) {
         parent::__construct($context);
         $this->formKeyValidator = $formKeyValidator;
         $this->askQuestionFactory = $askQuestionFactory;
+        $this->mailHelper = $mailHelper;
     }
+
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
+     * @throws \Exception
      */
     public function execute()
     {
@@ -56,6 +73,16 @@ class Index extends \Magento\Framework\App\Action\Action
                 ->setSku($request->getParam('sku'))
                 ->setQuestion($request->getParam('question'));
             $askQuestion->save();
+
+
+            if ($request->getParam('email')) {
+                $product = $request->getParam('product_name');
+                $sku = $request->getParam('sku');
+                $email = $request->getParam('email');
+                $customerName = $request->getParam('name');
+                $message = $request->getParam('question');
+                $this->mailHelper->sendMail($product, $sku, $email, $customerName, $message);
+            }
 
             $data = [
                 'status' => self::STATUS_SUCCESS,
