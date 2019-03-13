@@ -88,7 +88,7 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
         try {
             $this->resource->save($askQuestion);
         } catch (\Exception $exception) {
-            throw new CouldNotSaveException(__($exception->getMessage()));
+//            throw new CouldNotSaveException(__($exception->getMessage()));
         }
         return $askQuestion;
     }
@@ -104,7 +104,7 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
         $askQuestion = $this->AskQuestionFactory->create();
         $this->resource->load($askQuestion, $askQuestionId);
         if (!$askQuestion->getId()) {
-            throw new NoSuchEntityException(__('AskQuestion with id "%1" does not exist.', $askQuestionId));
+//            throw new NoSuchEntityException(__('AskQuestion with id "%1" does not exist.', $askQuestionId));
         }
         return $askQuestion;
     }
@@ -168,7 +168,7 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
         try {
             $this->resource->delete($askQuestion);
         } catch (\Exception $exception) {
-            throw new CouldNotDeleteException(__($exception->getMessage()));
+//            throw new CouldNotDeleteException(__($exception->getMessage()));
         }
         return true;
     }
