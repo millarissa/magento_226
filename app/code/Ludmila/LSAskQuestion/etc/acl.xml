@@ -7,6 +7,10 @@
                 <resource id="Magento_Backend::content">
                     <resource id="Ludmila_LSAskQuestion::all_questions" title="All Questions" sortOrder="1" />
                 </resource>
+
+                <resource id="Magento_Backend::content">
+                    <resource id="Ludmila_LSAskQuestion::manage" title="Manage Questions" sortOrder="2" />
+                </resource>
             </resource>
         </resources>
     </acl>

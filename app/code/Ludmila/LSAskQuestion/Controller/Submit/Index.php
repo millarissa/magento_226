@@ -1,10 +1,14 @@
 <?php
 namespace Ludmila\LSAskQuestion\Controller\Submit;
+
 use Ludmila\LSAskQuestion\Model\AskQuestion;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Ludmila\LSAskQuestion\Helper\Mail;
+
+use Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface;
+use Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface;
 
 /**
  * Class Index
@@ -30,22 +34,30 @@ class Index extends \Magento\Framework\App\Action\Action
     private $mailHelper;
 
     /**
+     * @var AskQuestionRepositoryInterface
+     */
+    private $askQuestionRepository;
+
+    /**
      * Index constructor.
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
      * @param \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory
      * @param \Magento\Framework\App\Action\Context $context
      * @param Mail $mailHelper
+     * @param AskQuestionRepositoryInterface $askQuestionRepository
      */
     public function __construct(
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
         \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory,
         \Magento\Framework\App\Action\Context $context,
-        Mail $mailHelper
+        Mail $mailHelper,
+        AskQuestionRepositoryInterface $askQuestionRepository
     ) {
         parent::__construct($context);
         $this->formKeyValidator = $formKeyValidator;
         $this->askQuestionFactory = $askQuestionFactory;
         $this->mailHelper = $mailHelper;
+        $this->askQuestionRepository = $askQuestionRepository;
     }
 
     /**
@@ -57,12 +69,12 @@ class Index extends \Magento\Framework\App\Action\Action
         /** @var Http $request */
         $request = $this->getRequest();
         try {
-            if (!$this->formKeyValidator->validate($request) || $request->getParam('hideit')) {
-                throw new LocalizedException(__('Something went wrong. Probably you were away for quite a long time already. Please, reload the page and try again.'));
-            }
-            if (!$request->isAjax()) {
-                throw new LocalizedException(__('This question is not valid and can not be processed.'));
-            }
+//            if (!$this->formKeyValidator->validate($request) || $request->getParam('hideit')) {
+//                throw new LocalizedException(__('Something went wrong. Probably you were away for quite a long time already. Please, reload the page and try again.'));
+//            }
+//            if (!$request->isAjax()) {
+//                throw new LocalizedException(__('This request is not valid and can not be processed.'));
+//            }
 
             /** @var AskQuestion $askQuestion */
             $askQuestion = $this->askQuestionFactory->create();
@@ -72,9 +84,13 @@ class Index extends \Magento\Framework\App\Action\Action
                 ->setProductName($request->getParam('product_name'))
                 ->setSku($request->getParam('sku'))
                 ->setQuestion($request->getParam('question'));
-            $askQuestion->save();
+//            $askQuestion->save();
 
+            $this->askQuestionRepository->save($askQuestion);
 
+            /**
+             * Email Send
+             */
             if ($request->getParam('email')) {
                 $product = $request->getParam('product_name');
                 $sku = $request->getParam('sku');

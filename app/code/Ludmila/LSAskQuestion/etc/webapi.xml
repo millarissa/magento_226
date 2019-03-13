@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Request Sample -->
+    <route url="/V1/askQuestion/:askQuestionId" method="GET">
+        <service class="Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/askQuestion/:askQuestionId" method="GET">
+        <service class="Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Ludmila_LSAskQuestion::manage"/>
+        </resources>
+    </route>
+    <route url="/V1/askQuestion/search" method="GET">
+        <service class="Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Ludmila_LSAskQuestion::manage"/>
+        </resources>
+    </route>
+    <route url="/V1/askQuestion" method="POST">
+        <service class="Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Ludmila_LSAskQuestion::manage"/>
+        </resources>
+    </route>
+    <route url="/V1/askQuestion/:id" method="PUT">
+        <service class="Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Ludmila_LSAskQuestion::manage"/>
+        </resources>
+    </route>
+    <route url="/V1/askQuestion/:askQuestionId" method="DELETE">
+        <service class="Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Ludmila_LSAskQuestion::manage"/>
+        </resources>
+    </route>
+</routes>

@@ -1,12 +1,13 @@
 <?php
 namespace Ludmila\LSAskQuestion\Model;
 use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion as AskQuestionResource;
+use Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface;
 
 /**
- * Class LSAskQuestion
+ * Class AskQuestion
  * @package Ludmila\LSAskQuestion\Model
  */
-class AskQuestion extends \Magento\Framework\Model\AbstractModel
+class AskQuestion extends \Magento\Framework\Model\AbstractModel implements AskQuestionInterface
 {
     const STATUS_PENDING = 'pending';
     const STATUS_PROCESSED = 'processed';
@@ -45,6 +46,142 @@ class AskQuestion extends \Magento\Framework\Model\AbstractModel
     {
         $this->_init(AskQuestionResource::class);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->getData('request_id');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setId($id)
+    {
+        return $this->setData('request_id', $id);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt()
+    {
+        return $this->getData('created_at');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getData('name');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        return $this->setData('name', $name);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmail()
+    {
+        return $this->getData('email');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($email)
+    {
+        return $this->setData('email', $email);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getPhone()
+    {
+        return $this->getData('phone');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setPhone($phone)
+    {
+        return $this->setData('phone', $phone);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductName()
+    {
+        return $this->getData('product_name');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setProductName($productName)
+    {
+        return $this->setData('product_name', $productName);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getSku()
+    {
+        return $this->getData('sku');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setSku($sku)
+    {
+        return $this->setData('sku', $sku);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuestion()
+    {
+        return $this->getData('request');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuestion($question)
+    {
+        return $this->setData('request', $question);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatus()
+    {
+        return $this->getData('status');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setStatus($status)
+    {
+        return $this->setData('status', $status);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getStoreId()
+    {
+        return $this->getData('store_id');
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setStoreId($storeId)
+    {
+        return $this->setData('store_id', $storeId);
+    }
+
+
     /**
      * @return \Magento\Framework\Model\AbstractModel
      * @throws \Magento\Framework\Exception\NoSuchEntityException
