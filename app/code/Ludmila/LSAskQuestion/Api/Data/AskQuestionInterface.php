@@ -3,6 +3,7 @@ namespace Ludmila\LSAskQuestion\Api\Data;
 /**
  * Interface AskQuestionInterface
  * @package Ludmila\LSAskQuestion\Api\Data
+ * @api
  */
 interface AskQuestionInterface
 {

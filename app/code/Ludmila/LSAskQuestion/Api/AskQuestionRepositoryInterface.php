@@ -5,11 +5,12 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 /**
  * Interface AskQuestionRepositoryInterface
  * @package Ludmila\LSAskQuestion\Api
+ * @api
  */
 interface AskQuestionRepositoryInterface
 {
     /**
-     * Save request sample.
+     * Save question.
      *
      * @param \Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface $askQuestion
      * @return \Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface
@@ -18,7 +19,7 @@ interface AskQuestionRepositoryInterface
     public function save(\Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface $askQuestion);
     
     /**
-     * Retrieve request sample.
+     * Retrieve question.
      *
      * @param int $askQuestionId
      * @return \Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface
@@ -27,7 +28,7 @@ interface AskQuestionRepositoryInterface
     public function getById($askQuestionId);
     
     /**
-     * Retrieve request samples matching the specified criteria.
+     * Retrieve questions matching the specified criteria.
      *
      * @param SearchCriteriaInterface $searchCriteria
      * @return \Ludmila\LSAskQuestion\Api\Data\AskQuestionSearchResultsInterface
@@ -36,7 +37,7 @@ interface AskQuestionRepositoryInterface
     public function getList(SearchCriteriaInterface $searchCriteria);
    
     /**
-     * Delete request sample.
+     * Delete question.
      *
      * @param \Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface $askQuestion
      * @return bool true on success
@@ -45,7 +46,7 @@ interface AskQuestionRepositoryInterface
     public function delete(\Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface $askQuestion);
     
     /**
-     * Delete request sample by ID.
+     * Delete question by ID.
      *
      * @param int $askQuestionId
      * @return bool true on success

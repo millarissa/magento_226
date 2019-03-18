@@ -6,7 +6,6 @@ use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Ludmila\LSAskQuestion\Helper\Mail;
-
 use Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface;
 use Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface;
 
@@ -69,12 +68,12 @@ class Index extends \Magento\Framework\App\Action\Action
         /** @var Http $request */
         $request = $this->getRequest();
         try {
-//            if (!$this->formKeyValidator->validate($request) || $request->getParam('hideit')) {
-//                throw new LocalizedException(__('Something went wrong. Probably you were away for quite a long time already. Please, reload the page and try again.'));
-//            }
-//            if (!$request->isAjax()) {
-//                throw new LocalizedException(__('This request is not valid and can not be processed.'));
-//            }
+            if (!$this->formKeyValidator->validate($request) || $request->getParam('hideit')) {
+                throw new LocalizedException(__('Something went wrong. Probably you were away for quite a long time already. Please, reload the page and try again.'));
+            }
+            if (!$request->isAjax()) {
+                throw new LocalizedException(__('This request is not valid and can not be processed.'));
+            }
 
             /** @var AskQuestion $askQuestion */
             $askQuestion = $this->askQuestionFactory->create();
