@@ -1,5 +1,7 @@
 <?php /** @var $block \Magento\Catalog\Block\Product\View */ ?>
-<?php $imageObject = $block->getImage($block->getProduct(), 'product_base_image'); ?>
+<?php $imageObject = $block->getImage($block->getProduct(), 'product_base_image');
+        $product = $block->getProduct();
+?>
 <div class="catalog-product-view-tab-ask-question-form">
     <h2><?= $block->escapeHtml(__('Ask your question')) ?></h2>
     <div>
@@ -40,28 +42,28 @@
                         />
                     </div>
                 </div>
-                <div class="field telephone">
-                    <label class="label" for="telephone">
+                <div class="field phone">
+                    <label class="label" for="phone">
                         <span><?= $block->escapeHtml(__('Phone Number')) ?></span>
                     </label>
                     <div class="control">
-                        <input name="telephone"
-                               id="telephone"
+                        <input name="phone"
+                               id="phone"
                                title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
-                               placeholder="<?= $block->escapeHtmlAttr(__('+380000000000')) ?>"
+                               placeholder="<?= $block->escapeHtmlAttr(__('+38000-000-00-00')) ?>"
                                class="input-text"
                                type="text"
                                data-validate="{required:true, 'minlength':13, 'maxlength':13, 'mobileUA':true}"
                         />
                     </div>
                 </div>
-                <div class="field comment required">
-                    <label class="label" for="comment">
+                <div class="field question required">
+                    <label class="label" for="question">
                         <span><?= $block->escapeHtml(__('Your question')) ?></span>
                     </label>
                     <div class="control">
-                        <textarea name="comment"
-                                  id="comment"
+                        <textarea name="question"
+                                  id="question"
                                   title="<?= $block->escapeHtmlAttr(__('Your question?')) ?>"
                                   placeholder="<?= $block->escapeHtmlAttr(__('Enter your question here')) ?>"
                                   class="input-text"
@@ -73,6 +75,10 @@
             </fieldset>
             <div class="actions-toolbar">
                 <div class="primary">
+
+                    <input type="hidden" name="sku" value="<?= $block->escapeHtml($product->getSku()) ?>"/>
+                    <input type="hidden" name="product_name" value="<?= $block->escapeHtml($product->getName()) ?>"/>
+
                     <input type="hidden" name="hideit" id="hideit" value=""/>
                     <button type="submit" title="<?= $block->escapeHtmlAttr(__('Send question')) ?>" class="action submit primary">
                         <span><?= $block->escapeHtml(__('Send question')) ?></span>
