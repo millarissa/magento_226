@@ -6,6 +6,7 @@ use Magento\Framework\Api\SearchResultsInterface;
 /**
  * Interface AskQuestionSearchResultsInterface
  * @package Ludmila\LSAskQuestion\Api\Data
+ * @api
  */
 interface AskQuestionSearchResultsInterface extends SearchResultsInterface
 {

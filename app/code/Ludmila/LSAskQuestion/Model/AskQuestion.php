@@ -52,14 +52,14 @@ class AskQuestion extends \Magento\Framework\Model\AbstractModel implements AskQ
      */
     public function getId()
     {
-        return $this->getData('request_id');
+        return $this->getData('question_id');
     }
     /**
      * {@inheritdoc}
      */
     public function setId($id)
     {
-        return $this->setData('request_id', $id);
+        return $this->setData('question_id', $id);
     }
     /**
      * {@inheritdoc}
@@ -143,14 +143,14 @@ class AskQuestion extends \Magento\Framework\Model\AbstractModel implements AskQ
      */
     public function getQuestion()
     {
-        return $this->getData('request');
+        return $this->getData('question');
     }
     /**
      * {@inheritdoc}
      */
     public function setQuestion($question)
     {
-        return $this->setData('request', $question);
+        return $this->setData('question', $question);
     }
     /**
      * {@inheritdoc}
