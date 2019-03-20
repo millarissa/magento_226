@@ -8,7 +8,16 @@ use Magento\Ui\Component\Form\Element\Select;
 use Magento\Ui\Component\Form\Element\DataType\Text;
 class NewField extends AbstractModifier
 {
+    /**
+     * @var LocatorInterface
+     */
     private $locator;
+
+    /**
+     * NewField constructor.
+     * @param LocatorInterface $locator
+     */
+
     public function __construct(
         LocatorInterface $locator
     ) {
