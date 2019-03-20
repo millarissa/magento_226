@@ -8,8 +8,7 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface;
-//use Ludmila\LSAskQuestion\Api\Data\AskQuestionInterfaceFactory;
-use Ludmila\LSAskQuestion\Api\Data\AskQuestionSearchResultsInterface;
+use Ludmila\LSAskQuestion\Api\Data\AskQuestionSearchResultsInterfaceFactory;
 use Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface;
 use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion as ResourceAskQuestion;
 use Ludmila\LSAskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory as AskQuestionCollectionFactory;
@@ -33,11 +32,10 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
      */
     protected $askQuestionCollectionFactory;
 
-//    protected $dataAskQuestionFactory;
     /**
-     * @var AskQuestionSearchResultsInterface
+     * @var AskQuestionSearchResultsInterfaceFactory
      */
-    protected $searchResults;
+    protected $searchResultsFactory;
     /**
      * @var DataObjectHelper
      */
@@ -52,7 +50,7 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
      * @param ResourceAskQuestion $resource
      * @param AskQuestionFactory $askQuestionFactory
      * @param AskQuestionCollectionFactory $askQuestionCollectionFactory
-     * @param AskQuestionSearchResultsInterface $searchResults
+     * @param AskQuestionSearchResultsInterfaceFactory $searchResultsFactory
      * @param DataObjectHelper $dataObjectHelper
      * @param DataObjectProcessor $dataObjectProcessor
      */
@@ -60,17 +58,15 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
         ResourceAskQuestion $resource,
         AskQuestionFactory $askQuestionFactory,
         AskQuestionCollectionFactory $askQuestionCollectionFactory,
-//        AskQuestionInterfaceFactory $dataAskQuestionFactory,
-        AskQuestionSearchResultsInterface $searchResults,
+        AskQuestionSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
         DataObjectProcessor $dataObjectProcessor
     ) {
         $this->resource = $resource;
         $this->askQuestionFactory = $askQuestionFactory;
         $this->askQuestionCollectionFactory = $askQuestionCollectionFactory;
-        $this->searchResults = $searchResults;
+        $this->searchResultsFactory = $searchResultsFactory;
         $this->dataObjectHelper = $dataObjectHelper;
-//        $this->dataAskQuestionFactory = $dataAskQuestionFactory;
         $this->dataObjectProcessor = $dataObjectProcessor;
     }
     /**
@@ -98,7 +94,7 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
      */
     public function getById($askQuestionId)
     {
-        $askQuestion = $this->AskQuestionFactory->create();
+        $askQuestion = $this->askQuestionFactory->create();
         $this->resource->load($askQuestion, $askQuestionId);
         if (!$askQuestion->getId()) {
             throw new NoSuchEntityException(__('AskQuestion with id "%1" does not exist.', $askQuestionId));
@@ -115,8 +111,8 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
      */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria)
     {
-        $searchResults = $this->searchResults->create();
-        $searchResults->setSearchCriteria($criteria);
+        $searchResultsFactory = $this->searchResultsFactory->create();
+        $searchResultsFactory->setSearchCriteria($criteria);
         $collection = $this->askQuestionCollectionFactory->create();
         foreach ($criteria->getFilterGroups() as $filterGroup) {
             foreach ($filterGroup->getFilters() as $filter) {
@@ -124,7 +120,7 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
                 $collection->addFieldToFilter($filter->getField(), [$condition => $filter->getValue()]);
             }
         }
-        $searchResults->setTotalCount($collection->getSize());
+        $searchResultsFactory->setTotalCount($collection->getSize());
         $sortOrders = $criteria->getSortOrders();
         if ($sortOrders) {
             foreach ($sortOrders as $sortOrder) {
@@ -150,8 +146,8 @@ class AskQuestionRepository implements AskQuestionRepositoryInterface
                 'Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface'
             );
         }
-        $searchResults->setItems($askQuestions);
-        return $searchResults;
+        $searchResultsFactory->setItems($askQuestions);
+        return $searchResultsFactory;
     }
     /**
      * Delete AskQuestion

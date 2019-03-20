@@ -27,10 +27,10 @@
             </argument>
         </arguments>
     </type>
-    <preference for="Ludmila\AskQuestion\Api\Data\AskQuestionSearchResultsInterface"
+    <preference for="Ludmila\LSAskQuestion\Api\Data\AskQuestionSearchResultsInterface"
                 type="Magento\Framework\Api\SearchResults" />
-    <preference for="Ludmila\AskQuestion\Api\Data\AskQuestionInterface"
-                type="Ludmila\AskQuestion\Model\AskQuestion" />
-    <preference for="Ludmila\AskQuestion\Api\AskQuestionRepositoryInterface"
-                type="Ludmila\AskQuestion\Model\AskQuestionRepository" />
+    <preference for="Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface"
+                type="Ludmila\LSAskQuestion\Model\AskQuestion" />
+    <preference for="Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface"
+                type="Ludmila\LSAskQuestion\Model\AskQuestionRepository" />
 </config>
