@@ -1,23 +1,20 @@
 <div class="homework11">
-    <h2>Files:</h2>
-    <?php
-    foreach ($block->giveFileList() as $filename) {
-        echo $filename . ' was modified on: ' . date('F d Y H:i:s.', filemtime($filename)) . '<br/>';
-    }
-    ?>
-    <h2>Constants:</h2>
-    <?php
-    foreach ($block->getConstants() as $constant) {
-        echo $constant . '<br/>';
-    }
-    ?>
-    <h2>Methods:</h2>
-    <?php
-    foreach ($block->getMethods() as $method) {
-        echo $method->name . '<br/>';
-    }
-    ?>
-    <h2>Types:</h2>
+    <h2><?php /* @escapeNotVerified */ echo __('Files:')?></h2>
+    <?php foreach ($block->getFileList() as $file):?>
+        <p><?php echo __($file->getFilename().' - was modified at '.date('F d Y H:i:s.', $file->getATime())); ?></p>
+    <?php endforeach;?>
+
+    <h2><?php /* @escapeNotVerified */ echo __('Constants:')?></h2>
+    <?php foreach ($block->getConstants() as $constant): ?>
+        <p><?php echo __($constant); ?></p>
+    <?php endforeach;?>
+
+    <h2><?php /* @escapeNotVerified */ echo __('Methods:')?></h2>
+    <?php foreach ($block->getMethods() as $method): ?>
+        <p><?php echo __($method->name); ?></p>
+    <?php endforeach;?>
+
+    <h2><?php /* @escapeNotVerified */ echo __('Types:')?></h2>
     <?php foreach ($block->getParameters() as $parametersName => $parametersValue) :
         if (is_array($parametersValue)) {
             $parametersValue = $parametersValue['instance'] ?? 'array';
