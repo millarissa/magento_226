@@ -8,6 +8,8 @@
     </type>
 
     <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
-        <plugin name="add_custom_field_checkout_form" type="Ludmila\LSAskQuestion\Model\Plugin\Checkout\LayoutProcessor"/>
+        <plugin name="add-delivery-date-field"
+                type="Ludmila/LSAskQuestion/Plugin/Checkout/Model/Checkout/LayoutProcessor"/>
     </type>
+
 </config>
