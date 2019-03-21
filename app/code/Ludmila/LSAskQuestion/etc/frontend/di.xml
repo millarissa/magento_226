@@ -6,10 +6,4 @@
                 type="Ludmila\LSAskQuestion\Plugin\LSAskQuestion\Model\ResourceModel\AskQuestion\Collection"
         />
     </type>
-
-    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
-        <plugin name="add-delivery-date-field"
-                type="Ludmila/LSAskQuestion/Plugin/Checkout/Model/Checkout/LayoutProcessor"/>
-    </type>
-
 </config>

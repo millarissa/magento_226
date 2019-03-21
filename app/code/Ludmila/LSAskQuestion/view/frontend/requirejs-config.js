@@ -12,6 +12,9 @@ var config = {
         mixins: {
             'mage/validation': {
                 'Ludmila_LSAskQuestion/js/validation/validation-phone-mixin': true
+            },
+            'Magento_Checkout/js/action/set-shipping-information': {
+                'Ludmila_LSAskQuestion/js/action/set-shipping-information-mixin': true
             }
         }
     }
