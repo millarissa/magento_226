@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="admin_email_template"
+              label="Admin Email Template"
+              file="admin_email.html"
+              type="html"
+              module="Ludmila_LSAskQuestion"
+              area="frontend"/>
+
+    <template id="customer_email_template"
+              label="Customer Email Template"
+              file="customer_email.html"
+              type="html"
+              module="Ludmila_LSAskQuestion"
+              area="frontend"/>
+</config>
