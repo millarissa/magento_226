@@ -4,19 +4,29 @@ define([
     'uiComponent',
     'ko',
     'Magento_Checkout/js/model/step-navigator',
-    'mage/translate'
+    'mage/translate',
+    'mageUtils',
+    'Ludmila_LSCustomerOrder/js/model/product-service'
 ], function (
     $,
     _,
     Component,
     ko,
     stepNavigator,
-    $t
+    $t,
+    utils,
+    productService
 ) {
     'use strict';
 
     return Component.extend({
-        defaults: {},
+        defaults: {
+            customers: [],
+            listens: {
+                responseData: 'updateProductsList',
+                request: 'searchRequest'
+            }
+        },
         isVisible: ko.observable(false),
 
         /** @inheritdoc */
@@ -31,7 +41,48 @@ define([
                 20
             );
 
+            var self = this;
+            this.initProductList();
+            // this.responseData.subscribe(function(data){
+            //     self.customers(data.customers);
+            // });
             return this;
+        },
+
+        initObservable: function () {
+            return this._super()
+                .observe([
+                    'responseData',
+                    'responseStatus',
+                    'products',
+                    'request'
+                ]);
+        },
+
+        initProductList: function (params) {
+            productService.getProductList(
+                params,
+                {
+                    url: this.productsListUrl
+                },
+                {
+                    data: this.responseData,
+                    status: this.responseStatus
+                }
+            );
+        },
+
+        updateProductsList: function (data) {
+            this.products(data.products);
+        },
+
+
+        chooseProduct: function (product) {
+            alert(product.sku);
+        },
+
+        searchRequest: function (request) {
+            this.initProductList({q:request});
         },
 
         /**
