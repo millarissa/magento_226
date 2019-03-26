@@ -41,10 +41,10 @@ class GetList extends \Magento\Framework\App\Action\Action
         $products = $this->productRepository->getList($this->searchCriteriaBuilder->create())->getItems();
         $data = [];
         foreach ($products as $product) {
-            if ($addresses = $product->getOptions()) {
+            if ($productitems = $product->getOptions()) {
 
-                /** @var \Magento\Catalog\Model\Product $address */
-                foreach ($addresses as $address) {
+                /** @var \Magento\Catalog\Model\Product $productitems */
+                foreach ($productitems as $productitem) {
                 }
             }
             $data[] = [
