@@ -11,6 +11,7 @@ use Ludmila\LSAskQuestion\Model\AskQuestion;
 use \Magento\Framework\File\Csv;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
+use Magento\Customer\Model\Customer;
 
 class UpgradeData implements UpgradeDataInterface
 {
@@ -35,25 +36,35 @@ class UpgradeData implements UpgradeDataInterface
      * @var EavSetupFactory
      */
     private $eavSetupFactory;
+
+    /**
+     * @var \Magento\Customer\Model\Attribute
+     */
+    private $customerAttribute;
+
     /**
      * UpgradeData constructor.
      * @param \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory
-     * @param \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
-     * @param \Magento\Framework\File\Csv $csv
+     * @param ComponentRegistrar $componentRegistrar
+     * @param Csv $csv
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
+     * @param EavSetupFactory $eavSetupFactory
+     * @param \Magento\Customer\Model\Attribute $customerAttribute
      */
     public function __construct(
         \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory,
         \Magento\Framework\Component\ComponentRegistrar $componentRegistrar,
         \Magento\Framework\File\Csv $csv,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
-        EavSetupFactory $eavSetupFactory
+        EavSetupFactory $eavSetupFactory,
+        \Magento\Customer\Model\Attribute $customerAttribute
     ) {
         $this->askQuestionFactory = $askQuestionFactory;
         $this->componentRegistrar = $componentRegistrar;
         $this->csv = $csv;
         $this->transactionFactory = $transactionFactory;
         $this->eavSetupFactory = $eavSetupFactory;
+        $this->customerAttribute = $customerAttribute;
     }
     /**
      * {@inheritdoc}
@@ -118,6 +129,11 @@ class UpgradeData implements UpgradeDataInterface
                 ]
             );
         }
+
+        if (version_compare($context->getVersion(), '1.0.4') < 0) {
+            $this->createDisallowAskQuestionCustomerAttribute($setup);
+        }
+
         $setup->endSetup();
     }
     /**
@@ -153,6 +169,37 @@ class UpgradeData implements UpgradeDataInterface
             }
         }
     }
+
+    public function createDisallowAskQuestionCustomerAttribute($setup)
+    {
+        $code = 'disallow_ask_question';
+        /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+        $eavSetup->addAttribute(
+            Customer::ENTITY,
+            'disallow_ask_question',
+            [
+                'type'         => 'int',
+                'label'        => 'Disallow Asking a Question',
+                'input'        => 'select',
+                'source'       => Boolean::class,
+                'required'     => false,
+                'visible'      => false,
+                'user_defined' => true,
+                'position'     => 999,
+                'system'       => 0,
+                'default'      => 0,
+                'used_in_forms' => ['adminhtml_customer', 'customer_account_edit'],
+            ]
+        );
+        $attribute = $this->customerAttribute->loadByCode(Customer::ENTITY, $code);
+        $attribute->addData([
+            'attribute_set_id' => 1,
+            'attribute_group_id' => 1,
+            'used_in_forms' => ['adminhtml_customer', 'customer_account_edit'],
+        ])->save();
+    }
+
     /**
      * @param $fileName
      * @return string
