@@ -12,6 +12,7 @@ use \Magento\Framework\File\Csv;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Customer\Model\Customer;
+use Magento\Eav\Model\Entity\Attribute\Source\Boolean;
 
 class UpgradeData implements UpgradeDataInterface
 {
@@ -170,6 +171,11 @@ class UpgradeData implements UpgradeDataInterface
         }
     }
 
+    /**
+     * @param $setup
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
+     */
     public function createDisallowAskQuestionCustomerAttribute($setup)
     {
         $code = 'disallow_ask_question';
