@@ -136,6 +136,9 @@ class UpgradeData implements UpgradeDataInterface
             $this->createDisallowAskQuestionCustomerAttribute($setup);
         }
 
+        if (version_compare($context->getVersion(), '1.0.7') < 0) {
+            $this->createAddressCustomerAttribute($setup);
+        }
         $setup->endSetup();
     }
     /**
@@ -204,6 +207,41 @@ class UpgradeData implements UpgradeDataInterface
             'attribute_set_id' => 1,
             'attribute_group_id' => 1,
             'used_in_forms' => ['adminhtml_customer', 'customer_account_edit'],
+        ])->save();
+    }
+
+    /**
+     * @param $setup
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Exception
+     */
+    public function createAddressCustomerAttribute($setup)
+    {
+        $code = 'district_attribute';
+        /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+        $eavSetup->addAttribute(
+            'customer_address',
+            'district_attribute',
+            [
+                'type' => 'int',
+                'label' => 'District',
+                'input' => 'text',
+                'required' => false,
+                'visible' => true,
+                'visible_on_front' => true,
+                'user_defined' => false,
+                'sort_order' => 103,
+                'position' => 103,
+                'system' => 0,
+                'used_in_forms' => ['adminhtml_customer_address', 'customer_address_edit', 'customer_register_address','customer_address'],
+            ]
+        );
+        $attribute = $this->customerAttribute->loadByCode(Customer::ENTITY, $code);
+        $attribute->addData([
+            'attribute_set_id' => 1,
+            'attribute_group_id' => 1,
+            'used_in_forms' => ['adminhtml_customer_address', 'customer_address_edit', 'customer_register_address','customer_address'],
         ])->save();
     }
 
