@@ -66,6 +66,7 @@ class UpgradeData implements UpgradeDataInterface
         $this->transactionFactory = $transactionFactory;
         $this->eavSetupFactory = $eavSetupFactory;
         $this->customerAttribute = $customerAttribute;
+//        $this->eavConfig = $eavConfig;
     }
     /**
      * {@inheritdoc}
@@ -131,7 +132,7 @@ class UpgradeData implements UpgradeDataInterface
             );
         }
 
-        if (version_compare($context->getVersion(), '1.0.4') < 0) {
+        if (version_compare($context->getVersion(), '1.0.6') < 0) {
             $this->createDisallowAskQuestionCustomerAttribute($setup);
         }
 
