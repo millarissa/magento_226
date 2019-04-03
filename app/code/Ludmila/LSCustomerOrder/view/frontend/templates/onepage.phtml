@@ -1,0 +1,20 @@
+<?php
+/** @var \Ludmila\LSCustomerOrder\Block\Onepage $block */
+?>
+<script>
+    window.checkoutConfig = {};
+    window.checkoutConfig.checkoutUrl = '<?= $block->escapeUrl($block->getUrl('customer/customer/order')) ?>';
+    window.checkoutConfig.pageNotFoundUrl = '<?= $block->escapeUrl($block->getUrl('customer/customer/order')) ?>';
+</script>
+<h3>Onepage component</h3>
+<div id="onepageSelectorId" data-bind="scope:'onepageScope'" class="checkout-container">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#onepageSelectorId": {
+                "Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout() ?>
+            }
+        }
+    </script>
+</div>
+

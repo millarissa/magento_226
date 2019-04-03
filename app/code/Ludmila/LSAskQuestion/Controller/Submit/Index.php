@@ -1,8 +1,18 @@
 <?php
 namespace Ludmila\LSAskQuestion\Controller\Submit;
+
+use Ludmila\LSAskQuestion\Model\AskQuestion;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
+use Ludmila\LSAskQuestion\Helper\Mail;
+use Ludmila\LSAskQuestion\Api\Data\AskQuestionInterface;
+use Ludmila\LSAskQuestion\Api\AskQuestionRepositoryInterface;
+
+/**
+ * Class Index
+ * @package Ludmila\LSAskQuestion\Controller\Submit
+ */
 class Index extends \Magento\Framework\App\Action\Action
 {
     const STATUS_ERROR = 'Error';
@@ -11,20 +21,47 @@ class Index extends \Magento\Framework\App\Action\Action
      * @var \Magento\Framework\Data\Form\FormKey\Validator
      */
     private $formKeyValidator;
+
+    /**
+     * @var \Ludmila\LSAskQuestion\Model\AskQuestionFactory
+     */
+    private $askQuestionFactory;
+
+    /**
+     * @var Mail
+     */
+    private $mailHelper;
+
+    /**
+     * @var AskQuestionRepositoryInterface
+     */
+    private $askQuestionRepository;
+
     /**
      * Index constructor.
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     * @param \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory
      * @param \Magento\Framework\App\Action\Context $context
+     * @param Mail $mailHelper
+     * @param AskQuestionRepositoryInterface $askQuestionRepository
      */
     public function __construct(
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
-        \Magento\Framework\App\Action\Context $context
+        \Ludmila\LSAskQuestion\Model\AskQuestionFactory $askQuestionFactory,
+        \Magento\Framework\App\Action\Context $context,
+        Mail $mailHelper,
+        AskQuestionRepositoryInterface $askQuestionRepository
     ) {
         parent::__construct($context);
         $this->formKeyValidator = $formKeyValidator;
+        $this->askQuestionFactory = $askQuestionFactory;
+        $this->mailHelper = $mailHelper;
+        $this->askQuestionRepository = $askQuestionRepository;
     }
+
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
+     * @throws \Exception
      */
     public function execute()
     {
@@ -35,7 +72,31 @@ class Index extends \Magento\Framework\App\Action\Action
                 throw new LocalizedException(__('Something went wrong. Probably you were away for quite a long time already. Please, reload the page and try again.'));
             }
             if (!$request->isAjax()) {
-                throw new LocalizedException(__('This question is not valid and can not be processed.'));
+                throw new LocalizedException(__('This request is not valid and can not be processed.'));
+            }
+
+            /** @var AskQuestion $askQuestion */
+            $askQuestion = $this->askQuestionFactory->create();
+            $askQuestion->setName($request->getParam('name'))
+                ->setEmail($request->getParam('email'))
+                ->setPhone($request->getParam('phone'))
+                ->setProductName($request->getParam('product_name'))
+                ->setSku($request->getParam('sku'))
+                ->setQuestion($request->getParam('question'))
+                ->setCustomerId($request->getParam('customer_id'));
+
+            $this->askQuestionRepository->save($askQuestion);
+
+            /**
+             * Email Send
+             */
+            if ($request->getParam('email')) {
+                $product = $request->getParam('product_name');
+                $sku = $request->getParam('sku');
+                $email = $request->getParam('email');
+                $customerName = $request->getParam('name');
+                $message = $request->getParam('question');
+                $this->mailHelper->sendMail($product, $sku, $email, $customerName, $message);
             }
 
             $data = [
