@@ -1,0 +1,18 @@
+
+<?php /** @var Ludmila\LSAskQuestion\Block\Requests $block */ ?>
+<?php /** @var Magento\Framework\View\TemplateEngine\Php $this */ ?>
+<table>
+    <tr>
+        <th><?php echo __('Date'); ?></th>
+        <th><?php echo __('Comment'); ?></th>
+        <th><?php echo __('Status'); ?></th>
+    </tr>
+
+    <?php foreach($block->getMyQuestions() as $askQuestions): ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($askQuestions->getCreatedAt()) ?></td>
+            <td><?php echo $this->escapeHtml($askQuestions->getComment()) ?></td>
+            <td><?php echo $this->escapeHtml($askQuestions->getStatus()) ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>

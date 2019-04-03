@@ -82,8 +82,8 @@ class Index extends \Magento\Framework\App\Action\Action
                 ->setPhone($request->getParam('phone'))
                 ->setProductName($request->getParam('product_name'))
                 ->setSku($request->getParam('sku'))
-                ->setQuestion($request->getParam('question'));
-//            $askQuestion->save();
+                ->setQuestion($request->getParam('question'))
+                ->setCustomerId($request->getParam('customer_id'));
 
             $this->askQuestionRepository->save($askQuestion);
 

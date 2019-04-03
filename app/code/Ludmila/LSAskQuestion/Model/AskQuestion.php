@@ -180,7 +180,20 @@ class AskQuestion extends \Magento\Framework\Model\AbstractModel implements AskQ
     {
         return $this->setData('store_id', $storeId);
     }
-
+    /**
+     * @return int
+     */
+    public function getCustomerId():int
+    {
+        return (int) $this->getData('customer_id');
+    }
+    /**
+     * @param int $customerId
+     */
+    public function setCustomerId($customerId)
+    {
+        $this->setData('customer_id', $customerId);
+    }
 
     /**
      * @return \Magento\Framework\Model\AbstractModel
