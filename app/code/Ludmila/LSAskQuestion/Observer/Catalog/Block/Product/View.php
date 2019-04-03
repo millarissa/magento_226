@@ -5,6 +5,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Registry;
 use Magento\Customer\Model\Session;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Customer\Model\Group;
 
 /**
  * Class View
@@ -24,16 +25,23 @@ class View implements \Magento\Framework\Event\ObserverInterface
     protected $customerSession;
 
     /**
+     * @var Group
+     */
+    protected $customerGroup;
+
+    /**
      * View constructor.
      * @param Registry $registry
      * @param Session $customerSession
      */
     public function __construct(
         \Magento\Framework\Registry $registry,
-        \Magento\Customer\Model\Session $customerSession)
+        \Magento\Customer\Model\Session $customerSession,
+        Group $customerGroup)
     {
         $this->_registry = $registry;
         $this->customerSession = $customerSession;
+        $this->customerGroup = $customerGroup;
     }
     /**
      * @param Observer $observer
@@ -45,12 +53,25 @@ class View implements \Magento\Framework\Event\ObserverInterface
         $actionName = $event->getData('full_action_name');
         $product = $this->_registry->registry('current_product');
 
-        if ($product && $actionName === 'catalog_product_view' && !$this->customerSession->getCustomer()->getDisallowAskQuestion()) {
+        if ($product && $actionName === 'catalog_product_view'
+            && !$this->customerSession->getCustomer()->getDisallowAskQuestion()
+            && $this->getCustomerGroup() !== 'Forbidden for ask questions') {
+
             $layout = $event->getData('layout');
             $layoutUpdate = $layout->getUpdate();
             $layoutUpdate->addHandle(static::LAYOUT_HANDLE_NAME);
         }
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCustomerGroup()
+    {
+        $currentGroupId = $this->customerSession->getCustomer()->getGroupId();
+        $collection = $this->customerGroup->load($currentGroupId);
+        return $collection->getCustomerGroupCode();
     }
 }
